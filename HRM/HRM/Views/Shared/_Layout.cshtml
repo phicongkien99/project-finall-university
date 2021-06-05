@@ -1,41 +1,251 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý nhân sự - HRM</title>
+
+    <!-- Favicons -->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="~/assets/images/icons/avata.png">
+
+    <!-- HELPERS -->
+    <link rel="stylesheet" type="text/css" href="~/assets/helpers/animate.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/helpers/backgrounds.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/helpers/grid.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/helpers/utils.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/helpers/colors.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/helpers/boilerplate.css">
+
+
+    <link rel="stylesheet" type="text/css" href="~/assets/themes/admin/layout.css">
+    
+    <!-- CSS vendor   -->
+    <link href="~/assets/vendors/general/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/vendors/custom/vendors/line-awesome/css/line-awesome.css" rel="stylesheet" type="text/css">    
+    <link href="~/assets/vendors/custom/vendors/fontawesome5/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/vendors/general/sweetalert2/dist/sweetalert2.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/vendors/general/toastr/build/toastr.css" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="~/Online/style.bundle.css">
+    <link rel="stylesheet" href="~/Content/css/siteStyle.css">
+    <link rel="stylesheet" href="~/Content/css/layout.css">
+    
+    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.js"></script>
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
-                </ul>
+<body class="k-page--loading-enabled k-page--loading k-page--fixed k-header--fixed k-header--minimize-menu k-header-mobile--fixed" style="background-color: white">
+    
+    <!-- begin:: Page -->    
+    <div class="k-grid k-grid--hor k-grid--root">
+        <div class="k-grid__item k-grid__item--fluid k-grid k-grid--ver k-page" style="height: 77%">
+            <div class="k-grid__item k-grid__item--fluid k-grid k-grid--hor k-wrapper " id="k_wrapper">
+
+                <!-- begin:: Header -->
+                <div id="k_header" class="k-header k-grid__item  k-header--fixed " data-kheader-minimize="on">
+                    <div class="fpts-header-desktop" style="background-color: #e56f21">
+                        <div class=" container d-flex ">
+                            <div class="fpts-left d-flex justify-content-center align-items-center">
+                                <span>
+                                    <span style="text-transform:none">
+                                        PHẦN MỀM QUẢN LÝ NHÂN SỰ (HRM)
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="fpts-right d-flex justify-content-end align-items-center">
+                                <div class="col-md-3">
+                                    <span class="text-light">USER_01</span>
+                                    <a class="text-light" href="/internal/Dang-Xuat"><i class="fas fa-sign-out-alt"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- begin: Header Menu -->
+                    <div id="page-sidebar" class="bg-fpts fpts-menu--gsm mb-3">
+                        <div class="container">
+                            <div class="row">
+                                <div class="scroll-sidebar">
+                                    <ul id="sidebar-menu" class="sf-js-enabled sf-arrows">
+                                        <li class="dropdownmenu nav-item dropdown fpts-dropdown" id="k_drdwn_mng_lv1">
+                                            <a href="#" title="" class="nav-link default-click" data-toggle="dropdown" id="dropdownMenu1">
+                                                <span id="ctl00_lblHome">NHÂN SỰ</span>
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                <li class="dropdown-menu-item f1_dropdown dropdown-submenu" id="k_drdwn_mng_lv2_1">
+                                                    <a id="dropdownMenu2" class="dropdown-item dropdown dropdown-general" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#" style="border-bottom: 1px solid gainsboro;">
+                                                        <span>Hồ sơ nhân viên</span>
+                                                    </a>
+                                                </li>
+                                                <li class="dropdown-menu-item f2_dropdown dropdown-submenu" id="k_drdwn_mng_lv2_2">
+                                                    <a id="dropdownMenu2" class="dropdown-item dropdown dropdown-general" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#" style="border-bottom: 1px solid gainsboro;">
+                                                        <span>Hồ sơ cá nhân</span>
+                                                    </a>
+                                                </li>
+                                                <li class="dropdown-menu-item f2_dropdown dropdown-submenu" id="k_drdwn_mng_lv2_2">
+                                                    <a id="dropdownMenu2" class="dropdown-item dropdown dropdown-general" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#" style="border-bottom: 1px solid gainsboro;">
+                                                        <span>Hợp đồng</span>
+                                                    </a>
+                                                </li>
+                                                <li class="dropdown-menu-item f2_dropdown dropdown-submenu" id="k_drdwn_mng_lv2_2">
+                                                    <a id="dropdownMenu2" class="dropdown-item dropdown dropdown-general" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+                                                        <span>Bảng lương</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <a href="#" title="">
+                                                <span id="ctl00_Label1">QUẢN LÝ HỢP ĐỒNG</span>
+                                            </a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <a href="#" title="">
+                                                <span id="ctl00_Label1">QUẢN LÝ LƯƠNG</span>
+                                            </a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li class="dropdownmenu nav-item dropdown fpts-dropdown" id="k_drdwn_mng_lv1">
+                                            <a href="#" title="" class="nav-link default-click" data-toggle="dropdown" id="dropdownMenu1">
+                                                <span id="ctl00_lblHome">QUẢN LÝ CHẾ ĐỘ</span>
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                <div class="triangle"></div>
+                                                <li class="dropdown-menu-item f1_dropdown dropdown-submenu" id="k_drdwn_mng_lv2_1">
+                                                    <a id="dropdownMenu2" class="dropdown-item dropdown dropdown-general" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#" style="border-bottom: 1px solid gainsboro;">
+                                                        <span>Bảo hiểm xã hội</span>
+                                                    </a>
+                                                </li>
+                                                <li class="dropdown-menu-item f2_dropdown dropdown-submenu" id="k_drdwn_mng_lv2_2">
+                                                    <a id="dropdownMenu2" class="dropdown-item dropdown dropdown-general" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+                                                        <span>Khen thưởng/Kỷ luật</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li class="dropdownmenu nav-item dropdown fpts-dropdown" id="k_drdwn_mng_lv1">
+                                            <a href="#" title="" class="nav-link default-click" data-toggle="dropdown" id="dropdownMenu1">
+                                                <span id="ctl00_lblHome">THỐNG KÊ BÁO CÁO</span>
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                <div class="triangle"></div>
+                                                <li class="dropdown-menu-item f1_dropdown dropdown-submenu" id="k_drdwn_mng_lv2_1">
+                                                    <a id="dropdownMenu2" class="dropdown-item dropdown dropdown-general" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#" style="border-bottom: 1px solid gainsboro;">
+                                                        <span>Thống kê số lượng nhân viên</span>
+                                                    </a>
+                                                </li>
+                                                <li class="dropdown-menu-item f2_dropdown dropdown-submenu" id="k_drdwn_mng_lv2_2">
+                                                    <a id="dropdownMenu2" class="dropdown-item dropdown dropdown-general" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+                                                        <span>Thống kê tiền lương</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li class="dropdownmenu nav-item dropdown fpts-dropdown" id="k_drdwn_mng_lv1">
+                                            <a href="#" title="" class="nav-link default-click" data-toggle="dropdown" id="dropdownMenu1">
+                                                <span id="ctl00_lblHome">QUẢN LÝ HỆ THỐNG</span>
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                <div class="triangle"></div>
+                                                <li class="dropdown-menu-item f1_dropdown dropdown-submenu" id="k_drdwn_mng_lv2_1">
+                                                    <a id="dropdownMenu2" class="dropdown-item dropdown dropdown-general" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#" style="border-bottom: 1px solid gainsboro;">
+                                                        <span>Tạo tài khoản người dùng</span>
+                                                    </a>
+                                                </li>
+                                                <li class="dropdown-menu-item f2_dropdown dropdown-submenu" id="k_drdwn_mng_lv2_2">
+                                                    <a id="dropdownMenu2" class="dropdown-item dropdown dropdown-general" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#" style="border-bottom: 1px solid gainsboro;">
+                                                        <span>Tạo nhóm</span>
+                                                    </a>
+                                                </li>
+                                                <li class="dropdown-menu-item f2_dropdown dropdown-submenu" id="k_drdwn_mng_lv2_2">
+                                                    <a id="dropdownMenu2" class="dropdown-item dropdown dropdown-general" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+                                                        <span>Gán người dùng cho nhóm</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <a href="Doi-mat-khau.html" title="">
+                                                <span id="ctl00_Label8">Đổi mật khẩu</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- end: Header Menu -->
+                        </div>
+                    </div>
+                    <!-- end:: Header -->
+                    <!-- begin:: Content -->
+                    <div class="container">
+                        @RenderBody()
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+        <!-- begin::Scrolltop -->
+        <div class="ScrollTop" onclick="topFunction()" id="k_scrolltop"></div>
+        <!-- end::Scrolltop -->
+        <!-- begin:: Footer -->
+        <div class="k-footer k-grid__item" id="k_footer">
+            <div class="fpts-supporting-information">
+                <div class="k-container">
+                    <p style="color: #494949;padding: 5px 0 5px !important; font-size: 16px !important;"></p>
+                </div>
+            </div>
+            <div class="k-footer__content">
+                <div class="k-container">
+                    <div class="row">
+                        <div class="col-lg-4">                            
+                        </div>
+                        <div class="col-lg-4">
+                            <p class="fpts-title">Thông tin liên hệ</p>
+                            <div>
+                                <p class="location">MINH KHAI - HOÀI ĐỨC - HÀ NỘI</p>
+                                <p class="phone">9999999 | Fax : 028 9999 9999</p>
+                                <p class="mail">kienpc@fpts.com.vn</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="fpts-securities" style="background-color: #e56f21">
+                <div class="k-container">
+                    <p>© 2021 KienPC</p>
+                </div>
+            </div>
+        </div>
+        <!-- end:: Footer -->
+        <script type="text/javascript" src="~/Scripts/js/dist/navbar_responsive.js"></script>
+        <script type="text/javascript" src="~/Scripts/js/scrolltop.js"></script>
+        <script src="~/assets/vendors/general/sweetalert2/dist/sweetalert2.js"></script>
+        <script src="~/assets/vendors/general/toastr/build/toastr.min.js"></script>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+        <script type="text/javascript">
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "toast-bottom-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "20000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+        </script>
+
+        @RenderSection("Scripts", required: false)
 </body>
 </html>

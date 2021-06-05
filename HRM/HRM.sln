@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRM", "HRM\HRM.csproj", "{5
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRM_API", "HRM_API\HRM_API.csproj", "{6E2FDBC2-A293-4FE2-B070-0B1EF1965ECD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreLib", "CoreLib\CoreLib.csproj", "{2E147108-BC88-4861-ABB5-7A4B8983ADFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseDAL", "DatabaseDAL\DatabaseDAL.csproj", "{197966C5-77AA-43E8-B72E-118EF11A22F0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{6E2FDBC2-A293-4FE2-B070-0B1EF1965ECD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E2FDBC2-A293-4FE2-B070-0B1EF1965ECD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E2FDBC2-A293-4FE2-B070-0B1EF1965ECD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E147108-BC88-4861-ABB5-7A4B8983ADFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E147108-BC88-4861-ABB5-7A4B8983ADFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E147108-BC88-4861-ABB5-7A4B8983ADFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E147108-BC88-4861-ABB5-7A4B8983ADFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{197966C5-77AA-43E8-B72E-118EF11A22F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{197966C5-77AA-43E8-B72E-118EF11A22F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{197966C5-77AA-43E8-B72E-118EF11A22F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{197966C5-77AA-43E8-B72E-118EF11A22F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

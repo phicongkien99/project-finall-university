@@ -1,0 +1,207 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - HRM</title>
+
+    <!-- Favicons -->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="~/assets/images/icons/avata.png">
+
+    <!-- HELPERS -->
+    <link rel="stylesheet" type="text/css" href="~/assets/helpers/animate.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/helpers/backgrounds.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/helpers/grid.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/helpers/utils.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/helpers/colors.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/helpers/boilerplate.css">
+
+
+    <link rel="stylesheet" type="text/css" href="~/assets/themes/admin/layout.css">
+
+    <!-- CSS vendor   -->
+    <link href="~/assets/vendors/general/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/vendors/custom/vendors/line-awesome/css/line-awesome.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/vendors/custom/vendors/fontawesome5/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/vendors/general/sweetalert2/dist/sweetalert2.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/vendors/general/toastr/build/toastr.css" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="~/Online/style.bundle.css">
+    <link rel="stylesheet" href="~/Content/css/siteStyle.css">
+    <link rel="stylesheet" href="~/Content/css/layout.css">
+
+    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.js"></script>
+
+    <style type="text/css">
+
+        ::-webkit-input-placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: white;
+            opacity: 1; /* Firefox */
+        }
+
+    </style>
+</head>
+<body class="k-page--loading-enabled k-page--loading k-page--fixed k-header--fixed k-header--minimize-menu k-header-mobile--fixed" style="background-color: white">
+    <div class="k-grid k-grid--hor k-grid--root">
+        <div class="k-grid__item k-grid__item--fluid k-grid k-grid--ver k-page" style="height: 96%; background-image:url(../../Content/images/pexel2.jpg); background-position: center; background-repeat: no-repeat; background-size: cover;">
+            <div class="k-grid__item k-grid__item--fluid k-grid k-grid--hor k-wrapper " id="k_wrapper">
+
+                <!-- begin:: Header -->
+                <div id="k_header" class="k-header k-grid__item  k-header--fixed " data-kheader-minimize="on">
+                    <div class="fpts-header-desktop mb-5" style="background-color: #e56f21">
+                        <div class=" container d-flex ">
+                            <div class="fpts-left d-flex justify-content-center align-items-center">
+                                <span>
+                                    <span style="text-transform:none">
+                                        PHẦN MỀM QUẢN LÝ NHÂN SỰ (HRM)
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="fpts-right d-flex justify-content-end align-items-center">
+                                <div class="col-md-3">
+                                    <span class="text-light"></span>
+                                    @*<a class="text-light" href="/internal/Dang-Xuat"><i class="fas fa-sign-out-alt"></i></a>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- begin:: Content -->
+                    <div class="container" style="height: 481px; margin-top: 10%">
+                        <div class="row d-flex justify-content-center" style="margin-left: 40%">
+                            <div class="center  nav-login text-center fpts-login_design" style="background-color: inherit">
+                                <div class="mt-5">
+                                    <form asp-action="Login" method="post" asp-controller="Login" id="formLogin" enctype="multipart/form-data" class="col-12 padt20 form-change-password">
+                                        <div class="form-group row justify-ipad-password">
+                                            <div class="col-md-5 text-box-label ">
+                                                <label class="text-box-left" for="Username">Tên đăng nhập</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <input class="form-control" placeholder="Username" type="text" id="txtUsername" name="Username" autofocus minlength="4" maxlength="50" style="background-color: inherit" required />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row justify-ipad-password">
+                                            <div class="col-md-5 text-box-label ">
+                                                <label class="text-box-left" for="Password">Mật khẩu</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <input class="form-control" placeholder="Password" type="password" id="txtPassword" name="Password" autofocus minlength="4" maxlength="100" style="background-color: inherit"  required />
+                                                <span class="field-validation-valid" data-valmsg-for="txtPassword" data-valmsg-replace="true"></span>
+                                                <span onclick="displayPassword()" class="fa fa-eye toggle-password"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row justify-ipad-password">
+                                            <div class="col-md-5 input-group-prepend">
+                                                <img id="img-captcha" src="@Url.Action("GetCaptchaImage","Login")" />
+                                            </div>
+                                            <div class="col-md-7">
+                                                <input type="text" class="form-control" placeholder="Captcha Code" for="CaptchaCode" name="captchaCode" minlength="4" maxlength="4" style="background-color: inherit" required />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row justify-ipad-password">
+                                            <div class="col-md-12">
+                                                <button type="submit" class=" btn-primary form-control " id="btnLogin" data-callback='onSubmit' style="border-radius: 5px; width: 100% !important; background-color:#e56f21 ">Đăng nhập</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="fpts-support mb-5" style="color: white"><a href="#" style="color: white">Quên mật khẩu</a>&nbsp;|&nbsp;<span id="helpLogin">Trợ giúp</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- begin::Scrolltop -->
+        <div class="ScrollTop" onclick="topFunction()" id="k_scrolltop"></div>
+        <!-- end::Scrolltop -->
+        <!-- begin:: Footer -->
+        <div class="k-footer k-grid__item" id="k_footer" style="margin-top: 0">
+            
+            <div class="fpts-securities" style="background-color: #e56f21">
+                <div class="k-container">
+                    <p>© 2021 KienPC</p>
+                </div>
+            </div>
+        </div>
+        <!-- end:: Footer -->
+        <script type="text/javascript" src="~/Scripts/js/dist/navbar_responsive.js"></script>
+        <script type="text/javascript" src="~/Scripts/js/scrolltop.js"></script>
+        <script src="~/assets/vendors/general/sweetalert2/dist/sweetalert2.js"></script>
+        <script src="~/assets/vendors/general/toastr/build/toastr.min.js"></script>
+
+        <script>
+            // Toggle Password Visibility
+            function displayPassword() {
+            var x = document.getElementById("txtPassword");
+            if (x.type === "password") {
+            x.type = "text";
+            } else {
+            x.type = "password";
+            }
+            }
+
+            var Login = function () {
+
+            this.init = function () {
+            loadData();
+            registerEvents();
+            }
+
+            var loadData = function () {
+
+            }
+
+            var registerEvents = function () {
+
+            $("#img-captcha").click(function () {
+            resetCaptchaImage();
+            });
+
+            }
+
+            function resetCaptchaImage() {
+            d = new Date();
+            $("#img-captcha").attr("src", "@Url.Action("GetCaptchaImage", "Login")?" + d.getTime());
+            }
+            }
+
+            var login = new Login();
+            login.init();
+
+        </script>
+
+        <script type="text/javascript">
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "toast-bottom-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "20000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+        </script>
+
+        @if (TempData["Message"] != null)
+        {
+            <script>
+                toastr.error('@TempData["Message"]');
+            </script>
+        }
+</body>
+</html>
