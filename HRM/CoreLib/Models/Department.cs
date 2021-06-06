@@ -8,15 +8,15 @@ namespace CoreLib.Models
 {
     public class Department
     {
-        public int ID { get; set; }
+        public int? ID { get; set; }
 
         public string DepartmentCode { get; set; }
 
         public string DepartmentName { get; set; }
 
-        public int Order { get; set; }
+        public int? Order { get; set; }
 
-        public bool Status { get; set; }
+        public bool? Status { get; set; }
 
         public string Location { get; set; }
 

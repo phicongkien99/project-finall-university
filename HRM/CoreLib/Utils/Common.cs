@@ -159,7 +159,14 @@ namespace CoreLib.Utils
                 return reader.GetDateTime(reader.GetOrdinal(colName));
             return DateTime.MinValue;
         }
-        
+
+        public static DateTime? SafeGetDateTimeWithNull(SqlDataReader reader, string colName)
+        {
+            if (!reader.IsDBNull(reader.GetOrdinal(colName)))
+                return reader.GetDateTime(reader.GetOrdinal(colName));
+            return null;
+        }
+
         public static string ConvertDateToString(DateTime date, string format)
         {
             return date.ToString(format);

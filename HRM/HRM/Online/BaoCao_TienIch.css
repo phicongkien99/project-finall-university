@@ -27,27 +27,27 @@
     background: #96CD55;
 }
 
-.form-row > .col, .form-row > [class*="col-"]{
-    padding-left: 0px;  
+.form-row > .col, .form-row > [class*="col-"] {
+    padding-left: 0px;
 }
 
 
 li.breadcrumb-item.font-weight-bold:before {
-	content:none;
+    content: none;
 }
 
-.txtfromdate{
+.txtfromdate {
     margin-top: 2.6rem;
     width: auto;
-    padding: 0 10px !important;
+    padding: 0 31px !important;
 }
 
-.Deadline_wrapper{
-	padding-right: 0px !important;
+.Deadline_wrapper {
+    padding-right: 0px !important;
 }
 
-.FromDate_wrapper{
-    padding-right: 27px !important;
+.FromDate_wrapper {
+    padding-right: 0px !important;
     margin-top: 9px;
 }
 
@@ -61,9 +61,10 @@ li.breadcrumb-item.font-weight-bold:before {
     text-align: center;
 }
 
-.btn-expert > button{
+.btn-expert > button {
     margin-left: 0px;
 }
+
 .btn-section > button:not(:first-child) {
     margin-left: 4px;
 }
@@ -79,10 +80,12 @@ li.breadcrumb-item.font-weight-bold:before {
     background: #12AA4C;
 }
 
-table#listAccount td, table#listBanners td{
-    padding: 1rem 0px;
+table#listAccount td, table#listBanners td {
+    /* padding: 1rem 0px;*/
     /*text-align: center;*/
 }
+
+
 
 table#listAccount th, table#listBanners th {
     /*text-align: center;*/
@@ -93,22 +96,23 @@ table#listAccount th, table#listBanners th {
     margin-top: 0rem;
 }
 
-.custom-file-input{
-/*    display: inline-block;
+.custom-file-input {
+    /*    display: inline-block;
 	overflow: hidden;
     position: relative;*/
     opacity: 1;
     display: flex;
 }
-.custom-file-input input[type="file"]{
-    width: 70%;
-    height: 100%;
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 999;
-}
+
+    .custom-file-input input[type="file"] {
+        width: 70%;
+        height: 100%;
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 999;
+    }
 
 input#filetxt {
     width: 50%;
@@ -139,7 +143,6 @@ input#filetxt {
     text-align: center;
     margin-bottom: 2rem;
     margin-top: 1rem;
-
 }
 
 .save-banners-btn, .reset-btn, .update-btn {
@@ -171,7 +174,7 @@ label.k-checkbox.k-checkbox--bold.k-checkbox--brand {
 
 label[for="filetxt"] {
     /*margin-bottom: 7px !important;*/
-    margin-right: 1rem;
+    margin-right: 14px;
 }
 
 .form-section-bns {
@@ -183,8 +186,8 @@ label[for="addlink"], label[for="BannerTitle"] {
     font-weight: 100;
 }
 
-label[for="addlink"]{
-    margin-right: 2.82rem; 
+label[for="addlink"] {
+    margin-right: 2.82rem;
 }
 
 label[for="BannerTitle"] {
@@ -202,13 +205,17 @@ label[for="BannerTitle"] {
     /*padding: 0 4rem;*/
 }
 
-#change-pwd-btn{
+.save-rules-btn {
+    margin-right: 15px;
+}
+
+#change-pwd-btn {
     max-width: 100%;
     width: 100%;
 }
 
-#k_footer{
-    top : 7%;
+#k_footer {
+    top: 7%;
 }
 
 #listUser tbody td, #listGroup tbody td, #listUserNotInGroup tbody td, #listUserInGroup tbody td {
@@ -231,9 +238,9 @@ table#listUser {
     padding: 0;
 }
 
-.form-group-wrapper .form-group {
-    padding: 0 !important;
-}
+    .form-group-wrapper .form-group {
+        padding: 0 !important;
+    }
 
 .form-group.required .control-label:after {
     content: " (*)";
@@ -251,7 +258,8 @@ table#listUser {
     .custom-file-input input[type="text"] {
         left: 20rem;
     }
-    .form-group{
+
+    .form-group {
         max-width: 100%;
         padding-right: 0 !important;
     }
@@ -265,23 +273,23 @@ table#listUser {
         width: 7rem;
     }
 
-    .btn-search-section{
+    .btn-search-section {
         text-align: center;
     }
 
-    label[for="addlink"]{
+    label[for="addlink"] {
         margin-right: 3.52rem;
     }
 
-   .save-banners-btn, .reset-btn{
+    .save-banners-btn, .reset-btn {
         padding: 0 0rem !important;
-   }
+    }
 
-    .custom-file-input > img{
+    .custom-file-input > img {
         left: 77%;
     }
 
-    .txtfromdate{
+    .txtfromdate {
         padding: 0 0px !important;
     }
 
@@ -289,7 +297,7 @@ table#listUser {
         margin-top: 0;
     }
 
-    .frdateLabel{
+    .frdateLabel {
         padding: 0;
     }
 }
@@ -304,28 +312,36 @@ table#listUser {
     }
 }
 
+@media screen and (min-width:1024px) and (max-width:1208px) {
+    .txtfromdate {
+        padding: 0 13px !important;
+    }
+}
+
 @media screen and (min-width:768px) and (max-width:1023px) {
-   .btn-section > button {
+    .btn-section > button {
         margin-left: 15px;
     }
+
     .btn-expert > button {
         margin-left: 0px;
     }
+
     .Deadline_wrapper {
         margin: auto 0px;
         padding: 0px 5px !important;
     }
 
-    .txtfromdate{
+    .txtfromdate {
         margin-top: 8px;
         padding: 0 0px !important;
     }
 
-    label[for="addlink"]{
+    label[for="addlink"] {
         margin-right: 3.52rem;
     }
 
-    .custom-file-input > img{
+    .custom-file-input > img {
         left: 73%;
     }
 
@@ -334,17 +350,18 @@ table#listUser {
     }
 }
 
-@media screen and (max-width:1023px){
+@media screen and (max-width:1023px) {
     .btn-save-section {
         margin: 7px 0em;
-        text-align: center; 
+        text-align: center;
         padding: 0 0 !important;
     }
 
 
-    .btn-search-section{
+    .btn-search-section {
         text-align: center;
     }
+
     .form-section .form-group {
         padding: 0 !important;
     }
@@ -356,8 +373,8 @@ table#listUser {
     }
 }
 */
-@media screen and (max-width:768px){
-    .FromDate_wrapper{
+@media screen and (max-width:768px) {
+    .FromDate_wrapper {
         padding-right: 0px !important;
     }
     /*.form-group{
@@ -365,24 +382,25 @@ table#listUser {
     }*/
     .form-section {
         margin-bottom: 0;
-    } 
+    }
 }
 
 
 
-@media screen and (min-width: 768px) and (max-width:991px){
+@media screen and (min-width: 768px) and (max-width:991px) {
     .save-btn {
         position: relative;
         right: 10rem;
     }
+
     .save-rules-btn {
         position: relative;
         right: 0rem;
     }
 }
 
-@media screen and (min-width: 768px) and (max-width:1023px){
-    .Fromdate_update{
+@media screen and (min-width: 768px) and (max-width:1023px) {
+    .Fromdate_update {
         margin-top: 10px;
     }
 
@@ -391,21 +409,29 @@ table#listUser {
     }
 }
 
-@media screen and (min-width: 1025px){
-    .custom-file-input > img{
+@media screen and (min-width: 1025px) {
+    .custom-file-input > img {
         left: 70%;
     }
 }
 
-@media screen and (min-width: 576px) and (max-width:767px){
+@media screen and (min-width: 576px) and (max-width:767px) {
     label.col-sm-3.col-md-3.col-lg-2.col-form-label {
         padding: 0;
     }
 }
 
 
-@media screen and (max-width: 529px){
-    .custom-file-input > img{
+@media screen and (max-width: 529px) {
+    .custom-file-input > img {
         position: initial;
     }
+}
+
+td.titleBanner {
+    display: none;
+}
+
+#listBanners td {
+    padding: 0.75rem;
 }

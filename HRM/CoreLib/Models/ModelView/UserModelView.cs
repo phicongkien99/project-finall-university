@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoreLib.Models
+namespace CoreLib.Models.ModelView
 {
-    public class User
+    public class UserModelView
     {
         public string Username { get; set; }
 
@@ -27,5 +27,7 @@ namespace CoreLib.Models
         public string ModifiedBy { get; set; }
 
         public DateTime? ModifiedOn { get; set; }
+
+        public string GroupCode { get; set; }
     }
 }

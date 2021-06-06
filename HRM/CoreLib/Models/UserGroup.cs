@@ -14,6 +14,6 @@ namespace CoreLib.Models
 
         public string CreateBy { get; set; }
 
-        public DateTime CreateOn { get; set; }
+        public DateTime? CreateOn { get; set; }
     }
 }

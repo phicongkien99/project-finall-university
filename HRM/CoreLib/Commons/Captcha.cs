@@ -31,7 +31,7 @@ namespace CoreLib.Commons
             return sb.ToString();
         }
 
-        public static bool ValidateCaptchaCode(string userInputCaptcha, HttpContext context)
+        public static bool ValidateCaptchaCode(string userInputCaptcha, HttpContextBase context)
         {
             var isValid = userInputCaptcha == context.Session["CaptchaCode"].ToString();
             context.Session.Remove("CaptchaCode");

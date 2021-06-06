@@ -8,12 +8,12 @@ namespace CoreLib.Models
 {
     public class TotalSalary
     {
-        public int ID { get; set; }
+        public int? ID { get; set; }
 
         public string EmpCode { get; set; }
 
-        public double TotalMoney { get; set; }
+        public double? TotalMoney { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
     }
 }

@@ -8,13 +8,13 @@ namespace CoreLib.Models
 {
     public class Employee
     {
-        public int ID { get; set; }
+        public int? ID { get; set; }
 
         public string EmpCode { get; set; }
 
-        public DateTime BOD { get; set; }
+        public DateTime? BOD { get; set; }
 
-        public bool Sex { get; set; }
+        public bool? Sex { get; set; }
 
         public string Address { get; set; }
 
@@ -32,32 +32,32 @@ namespace CoreLib.Models
 
         public string TaxNameber { get; set; }
 
-        public bool EmpStatus { get; set; }
+        public bool? EmpStatus { get; set; }
 
-        public DateTime ActiveDate { get; set; }
+        public DateTime? ActiveDate { get; set; }
 
         public string EduLevel { get; set; }
 
         public string PassportNumber { get; set; }
 
-        public DateTime PassportDate { get; set; }
+        public DateTime? PassportDate { get; set; }
 
         public string PassportPlace { get; set; }
 
-        public int Height { get; set; }
+        public int? Height { get; set; }
 
-        public int Weight { get; set; }
+        public int? Weight { get; set; }
 
         public string OrtheInfo { get; set; }
 
-        public int VacationNumber { get; set; }
+        public int? VacationNumber { get; set; }
 
         public string CreateBy { get; set; }
 
-        public DateTime CreateOn { get; set; }
+        public DateTime? CreateOn { get; set; }
 
         public string ModifiedBy { get; set; }
 
-        public DateTime ModifiedOn { get; set; }
+        public DateTime? ModifiedOn { get; set; }
     }
 }

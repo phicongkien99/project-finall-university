@@ -8,7 +8,7 @@ namespace CoreLib.Models
 {
     public class Contract
     {
-        public int ID { get; set; }
+        public int? ID { get; set; }
 
         public string EmpCode { get; set; }
 

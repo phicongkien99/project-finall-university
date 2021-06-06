@@ -14,9 +14,8 @@ namespace HRM_API.Controllers
 {
     [Route("api/[controller]")]
     public class LoginAPIController : ApiController
-    {
-        // GET: api/LoginAPI
-        [HttpGet]
+    {       
+        [HttpPost]
         [Route(CommonConstants.API_LOGIN)]       
         public IHttpActionResult Login(LoginViewModel loginViewModel)
         {
@@ -28,25 +27,6 @@ namespace HRM_API.Controllers
             return Ok(new CResult { ErrorCode = -1, ErrorMessage = "Tên đăng nhập hoặc mật khẩu sai!" });
         }
 
-        // GET: api/LoginAPI/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST: api/LoginAPI
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT: api/LoginAPI/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/LoginAPI/5
-        public void Delete(int id)
-        {
-        }
+        
     }
 }

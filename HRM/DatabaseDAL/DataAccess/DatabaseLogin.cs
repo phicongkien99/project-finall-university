@@ -33,16 +33,7 @@ namespace DatabaseDAL.DataAccess
                 SqlParameter prmPassWord = new SqlParameter("@PassWord", SqlDbType.VarChar, 50);
                 prmPassWord.Direction = ParameterDirection.Input;
                 objSQL.Command.Parameters.Add(prmPassWord);
-
-                // input param log
-                SqlParameter prmUserLogin = new SqlParameter("@UserLogin", SqlDbType.VarChar, 50);
-                prmUserLogin.Direction = ParameterDirection.Input;
-                objSQL.Command.Parameters.Add(prmUserLogin);
-
-                SqlParameter prmRoleCode = new SqlParameter("@RoleCode", SqlDbType.VarChar, 50);
-                prmRoleCode.Direction = ParameterDirection.Input;
-                objSQL.Command.Parameters.Add(prmRoleCode);
-
+                
                 // output param
                 SqlParameter Message = new SqlParameter("@Message", SqlDbType.NVarChar, 100);
                 Message.Direction = ParameterDirection.Output;
@@ -54,14 +45,12 @@ namespace DatabaseDAL.DataAccess
 
                 //set value~
                 prmUserName.Value = User.UserName;
-                prmPassWord.Value = User.PassWord.HashMD5();
-                prmUserLogin.Value = User.UserName;
-                prmRoleCode.Value = User.RoleCode;
+                prmPassWord.Value = User.PassWord.HashMD5();                
 
                 objSQL.ExecuteSP(CommonConstants.SP_LOGIN);
 
                 var errCode = int.Parse(ErrCode.Value.ToString());
-                return objResult = new CResult { ErrorCode = errCode, ErrorMessage = Message.Value.ToString(), Data = null };
+                return objResult = new CResult { ErrorCode = errCode, ErrorMessage = Message.Value.ToString()};
             }
             catch (Exception ex)
             {

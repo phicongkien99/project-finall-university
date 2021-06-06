@@ -24,14 +24,7 @@ namespace HRM.Authentication
 
             if (this.AuthorizeCore(filterContext.HttpContext))
             {
-                try
-                {
-                    return;
-                }
-                catch (Exception)
-                {
-
-                }
+                return;
             }
             else
             {

@@ -1,8 +1,11 @@
 ﻿using CoreLib.Commons;
 using CoreLib.Models;
+using CoreLib.Models.ModelView;
 using CoreLib.Models.ViewModels;
 using CoreLib.Utils;
+using HRM.Authentication;
 using HRM.Utils;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,21 +26,76 @@ namespace HRM.Controllers
 
         [HttpPost]
         [Route("/login")]
-        public async Task<ActionResult> Login(LoginViewModel loginViewModel)
+        public async Task<ActionResult> Login(string username, string password, string captchaCode)
         {
             var errorCode = 0;
             var errorMess = string.Empty;
             
-            if (Validate(loginViewModel.UserName, loginViewModel.PassWord, out errorCode, out errorMess))
-            {
-                var cResult = await CCallApi.PostTemplateAsync(loginViewModel, CommonConstants.API_LOGIN);
+            if (Validate(username, password, out errorCode, out errorMess))
+            {                
+                if (Captcha.ValidateCaptchaCode(captchaCode, HttpContext))
+                {
+                    var cResult = await CCallApi.PostTemplateAsync(new LoginViewModel { UserName = username, PassWord = password }, CommonConstants.API_LOGIN);
 
-                return Json(cResult);
+                    if (cResult.ErrorCode == 0)
+                    {
+                        var param = $"?username={username}&empCode=&fullname=&email=&clienStatus=";
+
+                        try
+                        {
+                            var obj = await CCallApi.SearchTemplateAsync(CommonConstants.API_GET_USER + param);
+
+                            List<UserModelView> users = JsonConvert.DeserializeObject<List<UserModelView>>(obj.ToString());
+
+                            if (users.Count > 0)
+                            {
+                                HttpContext.Session["Username"] = users.FirstOrDefault().Username;
+                                HttpContext.Session["EmpCode"] = users.FirstOrDefault().EmpCode;
+                                HttpContext.Session["Fullname"] = users.FirstOrDefault().FullName;
+                                HttpContext.Session["Email"] = users.FirstOrDefault().Email;
+                                HttpContext.Session["GroupCode"] = users.FirstOrDefault().Username;
+                            }
+
+                            return RedirectToAction("Index", "Home");
+                        }
+                        catch (Exception)
+                        {
+
+                            throw;
+                        }
+                        
+                    }
+
+                    TempData.Add("Message", cResult.ErrorMessage);
+
+                    ViewBag.Data = cResult;
+
+                    return RedirectToAction("Index", "Login");
+                }
+
+                TempData.Add("Message", "Nhập sai captcha!");
+
+                return RedirectToAction("Index", "Login");
             }
-            
-            return Json(new CResult { ErrorCode = errorCode, ErrorMessage = errorMess });
+
+            TempData.Add("Message", errorMess);
+
+            return RedirectToAction("Index", "Login");
         }
 
+        [HttpGet]
+        [Route("/logout")]
+        [RequiredLogin]
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            Session.Abandon();
+            Session.RemoveAll();
+
+            return RedirectToAction("Index", "Login");
+        }
+
+        // Get captcha
         public ActionResult GetCaptchaImage()
         {
             int width = 100;

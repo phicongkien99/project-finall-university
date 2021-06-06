@@ -21,7 +21,6 @@
     <link rel="stylesheet" type="text/css" href="~/assets/helpers/colors.css">
     <link rel="stylesheet" type="text/css" href="~/assets/helpers/boilerplate.css">
 
-
     <link rel="stylesheet" type="text/css" href="~/assets/themes/admin/layout.css">
 
     <!-- CSS vendor   -->
@@ -38,13 +37,19 @@
     <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="~/Scripts/bootstrap.js"></script>
 
+    <script type="text/javascript" src="~/Scripts/js/dist/navbar_responsive.js"></script>
+    <script type="text/javascript" src="~/Scripts/js/scrolltop.js"></script>
+    <script src="~/assets/vendors/general/sweetalert2/dist/sweetalert2.js"></script>
+    <script src="~/assets/vendors/general/toastr/build/toastr.min.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/js/site.js"></script>
+
     <style type="text/css">
 
         ::-webkit-input-placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
             color: white;
             opacity: 1; /* Firefox */
         }
-
     </style>
 </head>
 <body class="k-page--loading-enabled k-page--loading k-page--fixed k-header--fixed k-header--minimize-menu k-header-mobile--fixed" style="background-color: white">
@@ -77,21 +82,21 @@
                         <div class="row d-flex justify-content-center" style="margin-left: 40%">
                             <div class="center  nav-login text-center fpts-login_design" style="background-color: inherit">
                                 <div class="mt-5">
-                                    <form asp-action="Login" method="post" asp-controller="Login" id="formLogin" enctype="multipart/form-data" class="col-12 padt20 form-change-password">
+                                    <form method="post" action="/Login/Login" id="formLogin" enctype="multipart/form-data" class="col-12 padt20 form-change-password">
                                         <div class="form-group row justify-ipad-password">
                                             <div class="col-md-5 text-box-label ">
-                                                <label class="text-box-left" for="Username">Tên đăng nhập</label>
+                                                <label class="text-box-left" for="username">Tên đăng nhập</label>
                                             </div>
                                             <div class="col-md-7">
-                                                <input class="form-control" placeholder="Username" type="text" id="txtUsername" name="Username" autofocus minlength="4" maxlength="50" style="background-color: inherit" required />
+                                                <input class="form-control" placeholder="Username" type="text" id="username" name="username" autofocus minlength="4" maxlength="50" style="background-color: inherit" required />
                                             </div>
                                         </div>
                                         <div class="form-group row justify-ipad-password">
                                             <div class="col-md-5 text-box-label ">
-                                                <label class="text-box-left" for="Password">Mật khẩu</label>
+                                                <label class="text-box-left" for="password">Mật khẩu</label>
                                             </div>
                                             <div class="col-md-7">
-                                                <input class="form-control" placeholder="Password" type="password" id="txtPassword" name="Password" autofocus minlength="4" maxlength="100" style="background-color: inherit"  required />
+                                                <input class="form-control" placeholder="Password" type="password" id="password" name="password" autofocus minlength="4" maxlength="100" style="background-color: inherit" required />
                                                 <span class="field-validation-valid" data-valmsg-for="txtPassword" data-valmsg-replace="true"></span>
                                                 <span onclick="displayPassword()" class="fa fa-eye toggle-password"></span>
                                             </div>
@@ -101,7 +106,7 @@
                                                 <img id="img-captcha" src="@Url.Action("GetCaptchaImage","Login")" />
                                             </div>
                                             <div class="col-md-7">
-                                                <input type="text" class="form-control" placeholder="Captcha Code" for="CaptchaCode" name="captchaCode" minlength="4" maxlength="4" style="background-color: inherit" required />
+                                                <input type="text" class="form-control" id="txtCaptcha" placeholder="Captcha Code" for="CaptchaCode" name="captchaCode" minlength="4" maxlength="4" style="background-color: inherit" required />
                                             </div>
                                         </div>
                                         <div class="form-group row justify-ipad-password">
@@ -123,7 +128,7 @@
         <!-- end::Scrolltop -->
         <!-- begin:: Footer -->
         <div class="k-footer k-grid__item" id="k_footer" style="margin-top: 0">
-            
+
             <div class="fpts-securities" style="background-color: #e56f21">
                 <div class="k-container">
                     <p>© 2021 KienPC</p>
@@ -131,45 +136,67 @@
             </div>
         </div>
         <!-- end:: Footer -->
-        <script type="text/javascript" src="~/Scripts/js/dist/navbar_responsive.js"></script>
-        <script type="text/javascript" src="~/Scripts/js/scrolltop.js"></script>
-        <script src="~/assets/vendors/general/sweetalert2/dist/sweetalert2.js"></script>
-        <script src="~/assets/vendors/general/toastr/build/toastr.min.js"></script>
 
         <script>
             // Toggle Password Visibility
             function displayPassword() {
-            var x = document.getElementById("txtPassword");
-            if (x.type === "password") {
-            x.type = "text";
-            } else {
-            x.type = "password";
-            }
+                var x = document.getElementById("txtPassword");
+
+                if (x.type === "password") {
+                    x.type = "text";
+                } else {
+                    x.type = "password";
+                }
             }
 
             var Login = function () {
 
-            this.init = function () {
-            loadData();
-            registerEvents();
-            }
+                this.init = function () {
+                    loadData();
+                    registerEvents();
+                }
 
-            var loadData = function () {
+                var loadData = function () {
 
-            }
+                }
 
-            var registerEvents = function () {
+                var registerEvents = function () {
 
-            $("#img-captcha").click(function () {
-            resetCaptchaImage();
-            });
+                    $("#img-captcha").click(function () {
+                        resetCaptchaImage();
+                    });
 
-            }
+                    @*$('body').on('click', '#btnLogin', function (e) {
+                        e.preventDefault();
 
-            function resetCaptchaImage() {
-            d = new Date();
-            $("#img-captcha").attr("src", "@Url.Action("GetCaptchaImage", "Login")?" + d.getTime());
-            }
+                        var username = $('#txtUsername').val();
+                        var password = $('#txtPassword').val();
+                        var captcha = $('#txtCaptcha').val();
+
+                        $.ajax({
+                            type: "POST",
+                            url: '@Url.Action("Login", "Login")',
+                            dataType: 'json',
+                            data: { username: username, password: password, captchaCode: captcha} ,
+                            success: function (data) {
+                                
+                                isMessageSuccess(data);
+
+                                if (data.ErrorCode == 0) return window.location.replace(data.Data);
+                                
+                            },
+                            error: function (err) {
+                                console.log(err);
+                            }
+                        });
+                    });*@
+
+                }
+
+                function resetCaptchaImage() {
+                    d = new Date();
+                    $("#img-captcha").attr("src", "@Url.Action("GetCaptchaImage", "Login")?" + d.getTime());
+                }
             }
 
             var login = new Login();
@@ -177,6 +204,7 @@
 
         </script>
 
+        // config toastr
         <script type="text/javascript">
             toastr.options = {
                 "closeButton": true,
