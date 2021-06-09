@@ -43,8 +43,10 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="DataAccess\CSQL.cs" />
+    <Compile Include="DataAccess\DatabaseGroup.cs" />
     <Compile Include="DataAccess\DatabaseLogin.cs" />
     <Compile Include="DataAccess\DatabaseUser.cs" />
+    <Compile Include="DataAccess\DatabaseUserGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

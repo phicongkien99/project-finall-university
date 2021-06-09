@@ -1,5 +1,5 @@
 ﻿@{
-    string username = Session["Username"].ToString();
+    string username = Session["Username"]?.ToString() ?? "User";
 }
 
 <!DOCTYPE html>

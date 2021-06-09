@@ -21,12 +21,12 @@
 <div class="k-portlet__body">
     <ul class="nav nav-pills nav-tabs-btn nav-pills-btn-success row" role="tablist">
         <li class="nav-item col gsm-link-tab shadow" style="background-color: #e56f21; border-radius: 10px;" id="liGroup">
-            <a class="nav-link" id="aGroup">
+            <a class="nav-link" id="aGroup" href="@Url.Action("Index", "Group")">
                 <span class="nav-link-title text-uppercase" style=" color: white">Quản lý Nhóm</span>
             </a>
         </li>
         <li class="nav-item col gsm-link-tab shadow" style="border-radius: 10px" id="liCreateGroup">
-            <a class="nav-link" id="aCreateGroup">
+            <a class="nav-link" id="aCreateGroup" href="@Url.Action("IndexCreate", "Group")">
                 <span class="nav-link-title text-uppercase">Tạo Nhóm</span>
             </a>
         </li>
@@ -44,11 +44,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>dsadasd</td>
-                        <td>dsadasd</td>
-                        <td>dsadasd</td>
-                    </tr>
+                   
                 </tbody>
             </table>
         </div>
@@ -61,13 +57,13 @@
 
         var renderColumns = [
             {
-                data: "groupCode",
+                data: "GroupCode",
             },
             {
-                data: "groupName",
+                data: "GroupName",
             },
             {
-                data: "groupCode",
+                data: "GroupCode",
                 render: function (data) {
                     return `<div class="d-inline-flex w-100">
                               <a class='EditAccount btn text-primary' data-id='${data}'><i class="far fa-edit"></i></a>
@@ -93,25 +89,22 @@
                     data: {} ,
                     success: function (data) {
 
-                        if ($.isArray(data)) {
+                        console.log(data);
 
-                            $('#listGroup').DataTable({
-                                ordering: false,
-                                dom: "lti<'d-flex pagingListUser justify-content-center'p>",
-                                destroy: true,
-                                "ordering": false,
-                                searching: false,
-                                lengthChange: false,
-                                className: 'dt-body-right',
-                                "bInfo": true,
-                                data: data,
-                                columns: renderColumns
-                            });
+                        $('#listGroup').DataTable({
+                            'ordering': false,                            
+                            destroy: true,                            
+                            'searching': false,
+                            lengthChange: false,                            
+                            "bInfo": true,
+                            'paging': false,
+                            dom: "lti<'d-flex pagingListUser justify-content-center'p>",
+                            className: 'dt-body-right',
+                            data: data,
+                            columns: renderColumns
+                        });
 
-                            return;
-                        }
-
-                        isMessageSuccess(data);
+                        //isMessageSuccess(data);
                     },
                     error: function (err) {
                         console.log(err);
@@ -125,102 +118,12 @@
                 // Action click edit record
                 $('body').on('click', '.EditAccount', function (e) {
                     e.preventDefault();
-
-                    // Action change tab
-                    $("#liGroup").removeClass("active");
-                    $("#liCreateGroup").addClass("active");
-
-                    $("#aGroup").attr('aria-selected', 'false');
-                    $("#aCreateGroup").attr('aria-selected', 'true');
-
-                    $("#k_tabs_1").removeClass("active show in");
-                    $("#updateTab").addClass("active show in");
-
-                    $("#btnInsert").attr('hidden', 'true');
-                    $("#btnUpdate").removeAttr('hidden');
-
-                    $("#txtGroupCode").attr('readonly', 'true');
-
+                    
                     var groupCode = $(this).data('id');
 
-                    $.ajax({
-                        type: "GET",
-                        url: '@Url.Action("GetGroup", "GroupAdmin")',
-                        dataType: 'json',
-                        data: { GroupCode: groupCode} ,
-                        success: function (data) {
-
-                            if ($.isArray(data)) {
-                                $('#txtGroupCode').val(data[0].groupCode);
-                                $('#txtGroupName').val(data[0].groupName);
-                                return;
-                            }
-
-                            isMessageSuccess(data);
-                        },
-                        error: function (err) {
-                            console.log(err);
-                        }
-                    });
-
+                    window.location.replace('@Url.Action("IndexCreate", "Group")' + '?groupCode=' + groupCode);
                 });
-
-                // Action click button Insert
-                $('#btnInsert').click((e) => {
-                    e.preventDefault();
-
-                    var groupCode = $('#txtGroupCode').val();
-                    var groupName = $('#txtGroupName').val();
-
-                    if (!groupCode.trim()) return toastr.warning('Trường mã nhóm không được để trống!');
-                    if (!groupName.trim()) return toastr.warning('Trường tên nhóm không được để trống!');
-
-                    $.ajax({
-                        type: "POST",
-                        url: '@Url.Action("InsertGroup", "GroupAdmin")',
-                        dataType: 'json',
-                        data: { GroupCode: groupCode, GroupName: groupName },
-                        success: function (data) {
-
-                            isMessageSuccess(data);
-                            reloadData();
-
-                        },
-                        error: function (err) {
-                            console.log(err);
-                        }
-                    });
-
-                });
-
-                // Action click button Upadte
-                $('#btnUpdate').click((e) => {
-                    e.preventDefault();
-
-                    var groupCode = $('#txtGroupCode').val();
-                    var groupName = $('#txtGroupName').val();
-
-                    if (!groupCode.trim()) return toastr.warning('Trường mã nhóm không được để trống!');
-                    if (!groupName.trim()) return toastr.warning('Trường tên nhóm không được để trống!');
-
-                    $.ajax({
-                        type: "PUT",
-                        url: '@Url.Action("UpdateGroup", "GroupAdmin")',
-                        dataType: 'json',
-                        data: { GroupCode: groupCode, GroupName: groupName },
-                        success: function (data) {
-
-                            isMessageSuccess(data);
-                            reloadData();
-
-                        },
-                        error: function (err) {
-                            console.log(err);
-                        }
-                    });
-
-                });
-
+                
                 // Action click button Upadte
                 $('body').on('click', '.DeleteAccount', function (e) {
                     e.preventDefault();
@@ -241,7 +144,7 @@
 
                             $.ajax({
                                 type: "DELETE",
-                                url: '@Url.Action("DeleteGroup", "GroupAdmin")',
+                                url: '@Url.Action("DeleteGroup", "Group")',
                                 dataType: 'json',
                                 data: { GroupCode: groupCode },
                                 success: function (data) {
@@ -276,7 +179,7 @@
 
             function reloadData() {
                 $('#listGroup').DataTable({
-                    ordering: false,
+                    'paging': false,
                     dom: "lti<'d-flex pagingListUser justify-content-center'p>",
                     destroy: true,
                     "ordering": false,
@@ -285,7 +188,7 @@
                     className: 'dt-body-right',
                     "bInfo": true,
                     ajax: {
-                        url: "@Url.Action("GetGroup", "GroupAdmin")",
+                        url: "@Url.Action("GetGroup", "Group")",
                         dataSrc: ""
                     },
                     columns: renderColumns

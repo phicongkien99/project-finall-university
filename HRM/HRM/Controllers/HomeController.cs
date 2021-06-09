@@ -9,7 +9,7 @@ namespace HRM.Controllers
 {
     public class HomeController : Controller
     {
-        [RequiredLogin]
+        //[RequiredLogin]
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
