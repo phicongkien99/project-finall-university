@@ -13,7 +13,7 @@ namespace DatabaseDAL.DataAccess
 {
     public class DatabaseUserGroup
     {
-        public static List<Group> SearchGroup(string groupCode, string groupName)
+        public static List<UserGroup> SearchUserGroup(string groupCode)
         {
             CSQL objSQL = new CSQL(CommonConstants.CONNECTION_STRING);
 
@@ -26,31 +26,27 @@ namespace DatabaseDAL.DataAccess
                 SqlParameter prmGroupCode = new SqlParameter("@GroupCode", SqlDbType.VarChar, 50);
                 prmGroupCode.Direction = ParameterDirection.Input;
                 objSQL.Command.Parameters.Add(prmGroupCode);
-
-                SqlParameter prmGroupName = new SqlParameter("@GroupName", SqlDbType.NVarChar, 200);
-                prmGroupName.Direction = ParameterDirection.Input;
-                objSQL.Command.Parameters.Add(prmGroupName);
-
+                
                 // set value param
                 prmGroupCode.Value = groupCode;
-                prmGroupName.Value = groupName;
-
-                var result = objSQL.GetDatasetFromSP(CommonConstants.SP_GET_USER_GROUP);
-
+                
                 SqlDataReader reader = objSQL.GetDataReaderFromSP(CommonConstants.SP_GET_USER_GROUP);
 
-                var ListGroup = new List<Group>();
+                var userGroups = new List<UserGroup>();
 
                 while (reader.Read())
                 {
                     try
                     {
-                        Group group = new Group();
+                        UserGroup userGroup = new UserGroup();
 
-                        group.GroupCode = Common.SafeGetString(reader, "GroupCode");
-                        group.GroupName = Common.SafeGetString(reader, "GroupName");
+                        userGroup.Username = Common.SafeGetString(reader, "Username");
+                        userGroup.FullName = Common.SafeGetString(reader, "FullName");
+                        userGroup.InGroup = Common.SafeGetInt(reader, "IN_GROUP");
+                        userGroup.CreateBy = Common.SafeGetString(reader, "CreateBy");
+                        userGroup.CreateOnStr = Common.SafeGetDateTime(reader, "CreateOn").ToString("dd/MM/yyyy");
 
-                        ListGroup.Add(group);
+                        userGroups.Add(userGroup);
                     }
                     catch (Exception ex)
                     {
@@ -58,7 +54,7 @@ namespace DatabaseDAL.DataAccess
                     }
                 }
 
-                return ListGroup;
+                return userGroups;
             }
             catch (Exception ex)
             {
@@ -69,7 +65,106 @@ namespace DatabaseDAL.DataAccess
                 objSQL._CloseConnection();
             }
 
-            return new List<Group>();
+            return new List<UserGroup>();
+        }
+
+        public static CResult InsertUserGroup(UserGroup userGroup)
+        {
+
+            CSQL objSQL = new CSQL(CommonConstants.CONNECTION_STRING);
+            CResult objResult;
+
+            try
+            {
+                if (objSQL._OpenConnection() == false)
+                    return objResult = new CResult { ErrorCode = -1, ErrorMessage = "Open Connection False!", Data = null };
+
+                // input param
+                SqlParameter prmGroupCode = new SqlParameter("@GroupCode", SqlDbType.VarChar, 50);
+                prmGroupCode.Direction = ParameterDirection.Input;
+                objSQL.Command.Parameters.Add(prmGroupCode);
+
+                SqlParameter prmUsername = new SqlParameter("@Username", SqlDbType.NVarChar, 200);
+                prmUsername.Direction = ParameterDirection.Input;
+                objSQL.Command.Parameters.Add(prmUsername);
+
+                SqlParameter prmCreateBy = new SqlParameter("@CreateBy", SqlDbType.VarChar, 50);
+                prmCreateBy.Direction = ParameterDirection.Input;
+                objSQL.Command.Parameters.Add(prmCreateBy);
+                
+                // output param
+                SqlParameter Message = new SqlParameter("@Message", SqlDbType.NVarChar, 100);
+                Message.Direction = ParameterDirection.Output;
+                objSQL.Command.Parameters.Add(Message);
+
+                SqlParameter ErrCode = new SqlParameter("@ErrCode", SqlDbType.Int);
+                ErrCode.Direction = ParameterDirection.Output;
+                objSQL.Command.Parameters.Add(ErrCode);
+
+                // set value
+                prmGroupCode.Value = userGroup.GroupCode;
+                prmUsername.Value = userGroup.Username;
+                prmCreateBy.Value = userGroup.CreateBy;
+
+                objSQL.ExecuteSP(CommonConstants.SP_INSERT_USER_GROUP);
+
+                var errCode = int.Parse(ErrCode.Value.ToString());
+                return objResult = new CResult { ErrorCode = errCode, ErrorMessage = Message.Value.ToString(), Data = null };
+            }
+            catch (Exception ex)
+            {
+                objResult = new CResult { ErrorCode = -1, ErrorMessage = ex.Message, Data = null };
+
+            }
+
+            return objResult;
+        }
+
+        public static CResult DeleteUserGroup(string groupCode, string username)
+        {
+
+            CSQL objSQL = new CSQL(CommonConstants.CONNECTION_STRING);
+            CResult objResult;
+
+            try
+            {
+                if (objSQL._OpenConnection() == false)
+                    return objResult = new CResult { ErrorCode = -1, ErrorMessage = "Open Connection False!", Data = null };
+
+                // input param
+                SqlParameter prmGroupCode = new SqlParameter("@GroupCode", SqlDbType.VarChar, 50);
+                prmGroupCode.Direction = ParameterDirection.Input;
+                objSQL.Command.Parameters.Add(prmGroupCode);
+
+                SqlParameter prmUsername = new SqlParameter("@Username", SqlDbType.NVarChar, 200);
+                prmUsername.Direction = ParameterDirection.Input;
+                objSQL.Command.Parameters.Add(prmUsername);
+                
+                // output param
+                SqlParameter Message = new SqlParameter("@Message", SqlDbType.NVarChar, 100);
+                Message.Direction = ParameterDirection.Output;
+                objSQL.Command.Parameters.Add(Message);
+
+                SqlParameter ErrCode = new SqlParameter("@ErrCode", SqlDbType.Int);
+                ErrCode.Direction = ParameterDirection.Output;
+                objSQL.Command.Parameters.Add(ErrCode);
+
+                // set value
+                prmGroupCode.Value = groupCode;
+                prmUsername.Value = username;
+               
+                objSQL.ExecuteSP(CommonConstants.SP_DELETE_USER_GROUP);
+
+                var errCode = int.Parse(ErrCode.Value.ToString());
+                return objResult = new CResult { ErrorCode = errCode, ErrorMessage = Message.Value.ToString(), Data = null };
+            }
+            catch (Exception ex)
+            {
+                objResult = new CResult { ErrorCode = -1, ErrorMessage = ex.Message, Data = null };
+
+            }
+
+            return objResult;
         }
     }
 }

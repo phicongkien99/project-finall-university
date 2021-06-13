@@ -14,6 +14,8 @@ namespace CoreLib.Models
 
         public string EmpCode { get; set; }
 
+        public string EmployeeCode { get; set; }
+
         public bool? ClientStatus { get; set; }
 
         public string FullName { get; set; }
@@ -27,5 +29,7 @@ namespace CoreLib.Models
         public string ModifiedBy { get; set; }
 
         public DateTime? ModifiedOn { get; set; }
+
+        public string GroupCode { get; set; }
     }
 }

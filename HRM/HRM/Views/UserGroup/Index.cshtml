@@ -1,0 +1,357 @@
+﻿
+@{
+    ViewBag.Title = "Thêm người dùng vào nhóm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="title_line d-flex" style="margin-bottom: 0px;">
+    <div class="container">
+        <span class="title_line_item">
+            <font color="#e56f21"><a href="#" style="color:#e56f21;font-weight: 600;">Quản lý hệ thống</a></font>
+        </span>
+        <span class="title_line_item">
+            <i class="fa  fa-caret-right" style="color: #e56f21"></i>
+        </span>
+        <span class="title_line_item">
+            <font color="#e56f21" style="font-weight: 600;">Thêm người dùng vào nhóm</font>
+        </span>
+    </div>
+</div>
+
+<div class="k-portlet__body">
+    <div class="row">
+        <form class="col-12 nopadding">
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne">
+                <div class="row padt20">
+                    <div class="col-md-12 nopadding d-inline-block m-auto">
+                        <div class="form-group row nopadding">
+                            <div class="col-md-2 nopadding">
+                                <label class="padt6">Nhóm</label>
+                            </div>
+                            <div class="col-md-10 nopadding">
+                                <select class="form-control" id="slGroup">
+                                    <option value="NV">Nhân Viên</option>
+                                    <option value="QL">Quản Lý</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row  mt-3">
+        <div class="col-12 nopadding">
+            <h4 class="text-primary" style="color: #e56f21 !important">Người dùng chưa thuộc Nhóm</h4>
+        </div>
+        <div class="content-tbl col-md-12 nopadding">
+            <table id="tblUserOutGroup" class="table shadow" style="width: 100%; border-radius: 10px">
+                <thead>
+                    <tr>
+                        <th>Tên tài khoản</th>
+                        <th>Người tạo</th>
+                        <th>Ngày tạo</th>
+                        <th>Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row col-12 d-flex justify-content-end nopadding">
+
+    </div>
+    <div class="row  mt-3">
+        <div class="col-12 nopadding">
+            <h4 class="text-primary" style="color: #e56f21 !important">Người dùng đã thuộc Nhóm</h4>
+        </div>
+        <div class="content-tbl col-md-12 nopadding">
+            <table id="tblUserInGroup" class="table shadow" style="width: 100%; border-radius: 10px">
+                <thead>
+                    <tr>
+                        <th>Tên tài khoản</th>
+                        <th>Người tạo</th>
+                        <th>Ngày tạo</th>
+                        <th>Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+	$(document).ready( function() {
+
+        var colummsOutGroup = [
+            {
+                data: "Username",
+            },
+            {
+                data: "CreateBy",
+            },
+            {
+                data: "CreateOnStr",
+            },
+            {
+                data: "Username",
+                render: function (data) {
+                    return `<div class="d-inline-flex w-100">
+                              <a class='EditAccount btn text-primary' data-id='${data}'><i class="far fa-plus"></i></a>
+                            </div >`;
+                }
+            },
+        ]
+
+        var colummsInGroup = [
+            {
+                data: "Username",
+            },
+            {
+                data: "CreateBy",
+            },
+            {
+                data: "CreateOnStr",
+            },
+            {
+                data: "Username",
+                render: function (data) {
+                    return `<div class="d-inline-flex w-100">
+                              <a class='DeleteAccount btn text-primary' data-id='${data}'><i class="fas fa-delete"></i></a>
+                            </div >`;
+                }
+            },
+        ]
+
+        var UserGroupAdmin = function() {
+
+            this.init = function() {
+                loadData();
+                registerEvents();
+            }
+
+            var loadData = async function () {
+                
+                await $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("GetGroup", "Group")',
+                    dataType: 'json',
+                    data: {  } ,
+                    success: function (data) {
+
+                        if (Array.isArray(data) && data.length > 0) {
+                            
+                            let html = '';
+
+                            data.forEach((item, index) => {
+                                html += `<option value="${item.GroupCode}">${item.GroupName}</option>`;
+                            });
+
+                            $('#slGroup').empty();
+                            $('#slGroup').append(html);
+                        }
+                        
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+
+                let groupCode = await $('#slGroup').val();
+                
+                await $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("GetUserGroup", "UserGroup")',
+                    dataType: 'json',
+                    data: { groupCode } ,
+                    success: function (data) {
+
+                        var inGroups = [];
+                        var outGroups = [];
+
+                        if (Array.isArray(data) && data.length > 0) {
+
+                            for (var i = 0; i < data.length; i++) {
+                                if (data[i].InGroup == 0) {
+                                    outGroups.push(data[i]);
+                                }
+
+                                if (data[i].InGroup == 1) {
+                                    inGroups.push(data[i]);
+                                }
+                            }
+
+                        }
+
+                        $('#tblUserOutGroup').DataTable({
+                            'ordering': false,
+                            destroy: true,
+                            'searching': false,
+                            lengthChange: false,
+                            "bInfo": true,
+                            'paging': false,
+                            dom: "lti<'d-flex pagingListUser justify-content-center'p>",
+                            className: 'dt-body-right',
+                            data: outGroups,
+                            columns: colummsOutGroup
+                        });
+
+                        $('#tblUserInGroup').DataTable({
+                            'ordering': false,
+                            destroy: true,
+                            'searching': false,
+                            lengthChange: false,
+                            "bInfo": true,
+                            'paging': false,
+                            dom: "lti<'d-flex pagingListUser justify-content-center'p>",
+                            className: 'dt-body-right',
+                            data: inGroups,
+                            columns: colummsInGroup
+                        });
+
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+
+            }
+
+            var registerEvents = function () {
+
+                // select group
+                $('#slGroup').change(function () { reloadData(); });
+
+                // Action click insert record
+                $('body').on('click', '.EditAccount', function (e) {
+                    e.preventDefault();
+
+                    let groupCode = $('#slGroup').val();
+                    var username = $(this).data('id');
+
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("InsertUserGroup", "UserGroup")',
+                        dataType: 'json',
+                        data: { groupCode, username },
+                        success: function (data) {
+                            
+                            isMessageSuccess(data);
+                            reloadData();
+                        
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    });
+                });
+
+                // Action click button delete
+                $('body').on('click', '.DeleteAccount', function (e) {
+                    e.preventDefault();
+
+                    Swal.fire({
+                        title: 'Thông báo',
+                        text: 'Bạn có chắc chắn muốn xóa?',
+                        type: 'warning',
+                        cancelButtonText: 'Hủy',
+                        showCancelButton: true,
+                        confirmButtonText: 'OK'
+                    }).then(result => {
+                        if (result.value) {
+
+                            let groupCode = $('#slGroup').val();
+                            var username = $(this).data('id');
+                            
+                            $.ajax({
+                                type: "DELETE",
+                                url: '@Url.Action("DeleteUserGroup", "UserGroup")',
+                                dataType: 'json',
+                                data: { groupCode, username },
+                                success: function (data) {
+
+                                    isMessageSuccess(data);
+                                    reloadData();
+
+                                },
+                                error: function (err) {
+                                    console.log(err);
+                                }
+                            });
+
+                        }
+                    });
+                });
+            }
+
+            var reloadData = async () => {
+
+                let groupCode = await $('#slGroup').val();
+
+                await $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("GetUserGroup", "UserGroup")',
+                    dataType: 'json',
+                    data: { groupCode } ,
+                    success: function (data) {
+
+                        var inGroups = [];
+                        var outGroups = [];
+
+                        if (Array.isArray(data) && data.length > 0) {
+
+                            for (var i = 0; i < data.length; i++) {
+                                if (data[i].InGroup == 0) {
+                                    outGroups.push(data[i]);
+                                }
+
+                                if (data[i].InGroup == 1) {
+                                    inGroups.push(data[i]);
+                                }
+                            }
+
+                        }
+
+                        $('#tblUserOutGroup').DataTable({
+                            'ordering': false,
+                            destroy: true,
+                            'searching': false,
+                            lengthChange: false,
+                            "bInfo": true,
+                            'paging': false,
+                            dom: "lti<'d-flex pagingListUser justify-content-center'p>",
+                            className: 'dt-body-right',
+                            data: outGroups,
+                            columns: colummsOutGroup
+                        });
+
+                        $('#tblUserInGroup').DataTable({
+                            'ordering': false,
+                            destroy: true,
+                            'searching': false,
+                            lengthChange: false,
+                            "bInfo": true,
+                            'paging': false,
+                            dom: "lti<'d-flex pagingListUser justify-content-center'p>",
+                            className: 'dt-body-right',
+                            data: inGroups,
+                            columns: colummsInGroup
+                        });
+
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            }
+        }
+
+        var userGroupAdmin = new UserGroupAdmin();
+        userGroupAdmin.init();
+
+    });
+
+</script>

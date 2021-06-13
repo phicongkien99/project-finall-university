@@ -4,15 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoreLib.Models
+namespace CoreLib.Models.ModelView
 {
-    public class Employee
+    public class EmployeeModelView
     {
         public int? ID { get; set; }
 
         public string EmpCode { get; set; }
 
         public DateTime? BOD { get; set; }
+
+        public string BODString { get; set; }
 
         public bool? Sex { get; set; }
 
@@ -59,5 +61,7 @@ namespace CoreLib.Models
         public string ModifiedBy { get; set; }
 
         public DateTime? ModifiedOn { get; set; }
+
+        public string DepartmentName { get; set; }
     }
 }

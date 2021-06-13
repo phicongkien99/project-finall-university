@@ -15,5 +15,13 @@ namespace CoreLib.Models
         public string CreateBy { get; set; }
 
         public DateTime? CreateOn { get; set; }
+
+        public string CreateOnStr { get; set; }
+
+        public int? InGroup { get; set; }
+
+        public string FullName { get; set; }
+
+        
     }
 }

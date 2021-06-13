@@ -19,6 +19,9 @@ namespace CoreLib.Commons
         public const string SP_LOGIN = "SP_LOGIN";
         // user
         public const string SP_GET_USER = "SP_GET_USER";
+        public const string SP_GET_USER_EMPLOYEE = "SP_GET_USER_EMPLOYEE";
+        public const string SP_INSERT_USER = "SP_INSERT_USER";
+        public const string SP_UPDATE_USER = "SP_UPDATE_USER";
         // group
         public const string SP_GET_GROUP = "SP_GET_GROUP";        
         public const string SP_UPDATE_GROUP = "SP_UPDATE_GROUP";
@@ -26,6 +29,15 @@ namespace CoreLib.Commons
         public const string SP_INSERT_GROUP  = "SP_INSERT_GROUP";
         // user group
         public const string SP_GET_USER_GROUP = "SP_GET_USER_GROUP";
+        public const string SP_INSERT_USER_GROUP = "SP_INSERT_USER_GROUP";
+        public const string SP_DELETE_USER_GROUP = "SP_DELETE_USER_GROUP";
+        // employee
+        public const string SP_GET_EMPLOYEE = "SP_GET_EMPLOYEE";
+        public const string SP_INSERT_EMPLOYEE = "SP_INSERT_EMPLOYEE";
+        public const string SP_UPDATE_EMPLOYEE = "SP_UPDATE_EMPLOYEE";
+
+
+
 
         // route api
         // login

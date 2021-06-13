@@ -16,8 +16,7 @@ namespace HRM_API.Controllers
         [Route(CommonConstants.API_GET_GROUP)]
         public IHttpActionResult GetGroup(string groupCode, string groupName)
         {
-            //return Ok(DatabaseGroup.SearchGroup(groupCode, groupName));
-            return Ok(DatabaseUserGroup.SearchGroup(groupCode, groupName));
+            return Ok(DatabaseGroup.SearchGroup(groupCode, groupName));            
         }
 
         [HttpPost]

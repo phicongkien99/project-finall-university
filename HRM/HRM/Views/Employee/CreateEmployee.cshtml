@@ -1,0 +1,289 @@
+﻿
+@{
+    ViewBag.Title = "Tạo nhân viên";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link type="text/css" href="~/Content/css/addgroupadmin.css" rel="stylesheet" />
+
+<div class="title_line d-flex" style="margin-bottom: 0px;">
+    <div class="container">
+        <span class="title_line_item">
+            <font color="#e56f21"><a href="#" style="color:#e56f21;font-weight: 600;">Nhân sự</a></font>
+        </span>
+        <span class="title_line_item">
+            <i class="fa  fa-caret-right" style="color: #e56f21"></i>
+        </span>
+        <span class="title_line_item">
+            <font color="#e56f21" style="font-weight: 600;">Hồ sơ nhân viên</font>
+        </span>
+    </div>
+</div>
+
+<div class="k-portlet__body">
+    <ul class="nav nav-pills nav-tabs-btn nav-pills-btn-success row" role="tablist">
+        <li class="nav-item col gsm-link-tab shadow" style="border-radius: 10px;" id="liGroup">
+            <a class="nav-link" id="aGroup" href="@Url.Action("ListEmployee", "Employee")">
+                <span class="nav-link-title text-uppercase" >Danh sách nhân viên</span>
+            </a>
+        </li>
+        <li class="nav-item col gsm-link-tab shadow" style="background-color: #e56f21; border-radius: 10px" id="liCreateGroup">
+            <a class="nav-link" id="aCreateGroup" href="@Url.Action("CreateEmployee", "Employee")">
+                <span class="nav-link-title text-uppercase" style=" color: white">Tạo nhân viên</span>
+            </a>
+        </li>
+    </ul>
+    <div class="line_top col-md-12" style="background-color: #e56f21">
+    </div>
+    <div class="mt-3">
+        <div>
+            <form class="form-inline shadow-lg p-3 mb-5 bg-white rounded" style="border-radius: 10px">
+                <div class="content-body contain-form-input col-12">
+                    <div class="form-group col-6" style="float: left">
+                        <label class="label-input" for="EmpCode">Mã nhân viên</label>
+                        <input class="txt-input form-control" type="text" id="txtEmpCode" name="EmpCode" readonly>
+                        <br />
+                        <label class="label-input" for="Address">Địa chỉ</label>
+                        <input class="txt-input form-control" type="text" id="txtAddress" name="Address">
+                        <br />
+                        <label class="label-input" for="BOD">Ngày sinh</label>
+                        <input class="txt-input form-control" type="date" id="txtDOB" name="BOD">
+                        <br />
+                        <label class="label-input" for="EmpStatus">Trạng thái</label>
+                        <select class="form-control txt-input" name="EmpStatus" id="slStatus">
+                            <option value="true">Đang hoạt động</option>
+                            <option value="false">Không hoạt động</option>
+                        </select>
+                        <br />
+                        <label class="label-input" for="Sex">Giới tính</label>
+                        <select class="form-control txt-input" name="Sex" id="slSex">
+                            <option value="true">Nam</option>
+                            <option value="false">Nữ</option>
+                        </select>
+                        <br />
+                        <label class="label-input" for="Phone">SĐT</label>
+                        <input class="txt-input form-control" type="tel" id="txtPhone" name="Phone">
+                        <br />
+                        <label class="label-input" for="OfficePosition">Chức vụ</label>
+                        <input class="txt-input form-control" type="tel" id="txtOfficePosition" name="OfficePosition">
+                        <br />
+                        <label class="label-input" for="Height">Chiều cao (cm)</label>
+                        <input class="txt-input form-control" type="number" min="0" id="txtHeight" name="Height">
+                        <br />
+                        <label class="label-input" for="Weight">Cân nặng (kg)</label>
+                        <input class="txt-input form-control" type="number" min="0" id="txtWeight" name="Weight">
+                        <br />
+                        <label class="label-input" for="VacationNumber">Số ngày phép</label>
+                        <input class="txt-input form-control" type="number" min="0" value="12" id="txtVacationNumber" name="VacationNumber">
+                        <br />
+                    </div>
+                    <div class="form-group col-6">
+                        <label class="label-input" for="FullName">Tên nhân viên</label>
+                        <input class="txt-input form-control" type="text" id="txtFullName" name="FullName">
+                        <br />
+                        <label class="label-input" for="Email">Email</label>
+                        <input class="txt-input form-control" type="email" id="txtEmail" name="Email">
+                        <br />
+                        <label class="label-input" for="DepartmentCode">Phòng/Ban</label>
+                        <select class="form-control txt-input" name="DepartmentCode" id="slDepartmentCode">
+                            <option value="NS">Nhân sự</option>
+                            <option value="IT">Công nghệ thông tin</option>
+                            <option value="KT">Kế toán</option>
+                            <option value="HC">Hành chính</option>
+                            <option value="MK">Maketing</option>
+                            <option value="SP">Chăm sóc khách hàng</option>
+                        </select>
+                        <br />
+                        <label class="label-input" for="TaxNumber">Mã số thuế</label>
+                        <input class="txt-input form-control" type="text" id="txtTaxNumber" name="TaxNumber">
+                        <br />
+                        <label class="label-input" for="ActiveDate">Ngày vào công ty</label>
+                        <input class="txt-input form-control" type="date" id="txtActiveDate" name="ActiveDate">
+                        <br />
+                        <label class="label-input" for="EduLevel">Trình độ học vấn</label>
+                        <input class="txt-input form-control" type="text" id="txtEduLevel" name="EduLevel">
+                        <br />
+                        <label class="label-input" for="PassportNumber">Số CMTND/CCCD</label>
+                        <input class="txt-input form-control" type="text" id="txtPassportNumber" name="PassportNumber">
+                        <br />
+                        <label class="label-input" for="PassportDate">Ngày cấp CMTND/CCCD</label>
+                        <input class="txt-input form-control" type="date" id="txtPassportDate" name="PassportDate">
+                        <br />
+                        <label class="label-input" for="PassportPlace">Nơi cấp CMTND/CCCD</label>
+                        <input class="txt-input form-control" type="text" id="txtPassportPlace" name="PassportPlace">
+                        <br />
+                        <label class="label-input" for="OrtheInfo">Thông tin thêm</label>
+                        <textarea class="txt-input form-control" name="OrtheInfo" id="txtOtherInfo"></textarea>
+                        <br />
+                    </div>
+                </div>
+                <div style="width: 100%; margin-top: 1.5%;">
+                    <input class="input-btn btn input-btn-left" id="btnAdd" type="button" value="Thêm" />
+                    <input class="input-btn btn input-btn-left" id="btnEdit" type="button" value="Sửa" style="display: none" />
+                    <input class="input-btn btn" id="btnRefresh" type="button" value="Làm mới" />
+                </div>
+            </form>
+        </div>
+        <div>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+	$(document).ready( function() {
+
+        var Employee = function() {
+
+            this.init = function() {
+                loadData();
+                registerEvents();
+            }
+
+            var loadData = function () {
+                // Lấy groupCode từ trên URL của page GroupManagement gửi sang
+                var queryString = decodeURIComponent(window.location.search);
+                queryString = queryString.substring(1);
+
+                var queries = queryString.split("=");
+
+                var empCode = queries[1];
+
+                if (typeof empCode === 'undefined') {
+                    return;
+                }
+                else
+                {
+                    
+                    $.ajax({
+                        url: '@Url.Action("GetEmployee", "Employee")',
+                        method: 'GET',
+                        dataType: 'json',
+                        data: {
+                            EmpCode: empCode
+                        },
+                        success: function (res) {
+                            console.log(res);
+
+                            $('#btnAdd').hide();
+                            $('#btnEdit').show();
+
+                            if (!Array.isArray(res) && res.length < 1) {
+                                toastr.error('Không tìm thấy nhân viên!');
+                                return;
+                            }
+
+                            var obj = res[0];
+
+                            $('#txtEmpCode').val(obj.EmpCode);
+                            $('#txtAddress').val(obj.Address);
+                            $('#txtDOB').val(parseDate(obj.BOD));
+                            $('#slStatus').val(`${obj.EmpStatus}`);
+                            $('#slSex').val(`${obj.Sex}`);
+                            $('#txtPhone').val(obj.Phone);
+                            $('#txtOfficePosition').val(obj.OfficePosition);
+                            $('#txtHeight').val(obj.Height);
+                            $('#txtWeight').val(obj.Weight);
+                            $('#txtVacationNumber').val(obj.VacationNumber);
+                            $('#txtFullName').val(obj.FullName);
+                            $('#txtEmail').val(obj.Email);
+                            $('#slDepartmentCode').val(obj.DepartmentCode);
+                            $('#txtTaxNumber').val(obj.TaxNumber);
+                            $('#txtActiveDate').val(parseDate(obj.ActiveDate));
+                            $('#txtEduLevel').val(obj.EduLevel);
+                            $('#txtPassportNumber').val(obj.PassportNumber);
+                            $('#txtPassportDate').val(parseDate(obj.PassportDate));
+                            $('#txtPassportPlace').val(obj.PassportPlace);
+                            $('#txtOtherInfo').val(obj.OtherInfo);
+                            
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    });
+                }
+            }
+
+            var registerEvents = function () {
+
+                // Action click button Insert
+                $('#btnAdd').click((e) => {
+                    e.preventDefault();
+
+                    let employeeViewModel = $('form').serialize();
+                    
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("InsertEmployee", "Employee")',
+                        dataType: 'json',
+                        data: employeeViewModel,
+                        success: function (data) {
+
+                            isMessageSuccess(data);
+
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    });
+
+                });
+
+                // Action click button Upadte
+                $('#btnEdit').click((e) => {
+                    e.preventDefault();
+
+                    let employeeViewModel = $('form').serialize();
+
+                    $.ajax({
+                        type: "PUT",
+                        url: '@Url.Action("UpdateEmployee", "Employee")',
+                        dataType: 'json',
+                        data: employeeViewModel,
+                        success: function (data) {
+
+                            isMessageSuccess(data);
+
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    });
+
+                });
+
+                // button làm mới form
+                $('body').on('click', '#btnRefresh', function (e) {
+                    e.preventDefault();
+
+                    console.log("ok");
+
+                    $(this).closest('form').find("input[type=text], input[type=tel], input[type=number], input[type=date], textarea").val("");
+
+                    $('#btnEdit').hide();
+                    $('#btnAdd').show();
+                });
+
+            }
+
+            function parseDate(strDate) {
+                
+                let date = new Date(Number(strDate.replace(/\D+/g, "")));
+                
+                return convert(date);
+            }
+
+            function convert(str) {
+                var date = new Date(str),
+                    mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+                    day = ("0" + date.getDate()).slice(-2);
+                return [date.getFullYear(), mnth, day].join("-");
+            }
+        }
+
+        var employee = new Employee();
+        employee.init();
+
+    });
+
+</script>

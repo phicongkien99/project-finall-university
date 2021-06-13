@@ -4,21 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoreLib.Models
+namespace CoreLib.Models.ViewModels
 {
-    public class Employee
+    public class EmployeeViewModel
     {
-        public int? ID { get; set; }
-
         public string EmpCode { get; set; }
 
         public DateTime? BOD { get; set; }
 
-        public bool? Sex { get; set; }
-
         public string Address { get; set; }
-
-        public string Phone { get; set; }
 
         public string Email { get; set; }
 
@@ -26,13 +20,21 @@ namespace CoreLib.Models
 
         public string DepartmentCode { get; set; }
 
+        public bool? EmpStatus { get; set; }
+
+        public int? ID { get; set; }
+        
+        public string BODString { get; set; }
+
+        public bool? Sex { get; set; }
+        
+        public string Phone { get; set; }        
+
         public string OfficeTile { get; set; }
 
         public string OfficePosition { get; set; }
 
-        public string TaxNumber { get; set; }
-
-        public bool? EmpStatus { get; set; }
+        public string TaxNumber { get; set; }       
 
         public DateTime? ActiveDate { get; set; }
 
@@ -59,5 +61,7 @@ namespace CoreLib.Models
         public string ModifiedBy { get; set; }
 
         public DateTime? ModifiedOn { get; set; }
+
+        public string DepartmentName { get; set; }
     }
 }

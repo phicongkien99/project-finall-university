@@ -162,7 +162,7 @@ namespace CoreLib.Utils
 
         public static DateTime? SafeGetDateTimeWithNull(SqlDataReader reader, string colName)
         {
-            if (!reader.IsDBNull(reader.GetOrdinal(colName)))
+            if (!reader.IsDBNull(reader.GetOrdinal(colName))) 
                 return reader.GetDateTime(reader.GetOrdinal(colName));
             return null;
         }
