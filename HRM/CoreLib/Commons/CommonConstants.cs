@@ -35,6 +35,10 @@ namespace CoreLib.Commons
         public const string SP_GET_EMPLOYEE = "SP_GET_EMPLOYEE";
         public const string SP_INSERT_EMPLOYEE = "SP_INSERT_EMPLOYEE";
         public const string SP_UPDATE_EMPLOYEE = "SP_UPDATE_EMPLOYEE";
+        // contract
+        public const string SP_INSERT_CONTRACT = "SP_INSERT_CONTRACT";
+        public const string SP_GET_CONTRACT = "SP_GET_CONTRACT";
+        public const string SP_UPDATE_CONTRACT = "SP_UPDATE_CONTRACT";
 
 
 
