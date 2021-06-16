@@ -19,5 +19,7 @@ namespace CoreLib.Models
         public string Note { get; set; }
 
         public string RewardType { get; set; }
+
+        public string FullName { get; set; }
     }
 }

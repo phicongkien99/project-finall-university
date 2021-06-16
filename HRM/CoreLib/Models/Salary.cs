@@ -15,5 +15,7 @@ namespace CoreLib.Models
         public string SalaryType { get; set; }
 
         public double? Money { get; set; }
+
+        public string FullName { get; set; }
     }
 }

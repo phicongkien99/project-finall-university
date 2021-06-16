@@ -131,11 +131,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Authentication\RequiredLoginAttribute.cs" />
+    <Compile Include="Controllers\BonusController.cs" />
     <Compile Include="Controllers\ContractController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InsuranceController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\SalaryController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserGroupController.cs" />
     <Compile Include="Global.asax.cs">
@@ -1751,6 +1754,9 @@
     <Content Include="Views\Employee\CreateEmployee.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Contract\Index.cshtml" />
+    <Content Include="Views\Salary\Index.cshtml" />
+    <Content Include="Views\Insurance\Index.cshtml" />
+    <Content Include="Views\Bonus\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

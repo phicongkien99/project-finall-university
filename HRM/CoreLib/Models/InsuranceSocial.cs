@@ -12,11 +12,17 @@ namespace CoreLib.Models
 
         public string EmpCode { get; set; }
 
+        public string FullName { get; set; }
+
         public string CodeNumber { get; set; }
 
         public DateTime? FromDate { get; set; }
 
         public DateTime? ToDate { get; set; }
+
+        public string FromDateStr { get; set; }
+
+        public string ToDateStr { get; set; }
 
         public bool? Status { get; set; }
 

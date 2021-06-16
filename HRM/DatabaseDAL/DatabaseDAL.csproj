@@ -46,9 +46,12 @@
     <Compile Include="DataAccess\DatabaseContract.cs" />
     <Compile Include="DataAccess\DatabaseEmployee.cs" />
     <Compile Include="DataAccess\DatabaseGroup.cs" />
+    <Compile Include="DataAccess\DatabaseInsurance.cs" />
     <Compile Include="DataAccess\DatabaseLogin.cs" />
+    <Compile Include="DataAccess\DatabaseSalary.cs" />
     <Compile Include="DataAccess\DatabaseUser.cs" />
     <Compile Include="DataAccess\DatabaseUserGroup.cs" />
+    <Compile Include="DatabaseBonus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

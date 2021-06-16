@@ -39,7 +39,18 @@ namespace CoreLib.Commons
         public const string SP_INSERT_CONTRACT = "SP_INSERT_CONTRACT";
         public const string SP_GET_CONTRACT = "SP_GET_CONTRACT";
         public const string SP_UPDATE_CONTRACT = "SP_UPDATE_CONTRACT";
-
+        // salary 
+        public const string SP_GET_SALARY = "SP_GET_SALARY";
+        public const string SP_INSERT_SALARY = "SP_INSERT_SALARY";       
+        public const string SP_DELETE_SALARY = "SP_DELETE_SALARY";
+        // insurance
+        public const string SP_GET_INSURANCE = "SP_GET_INSURANCE";
+        public const string SP_INSERT_INSURANCE = "SP_INSERT_INSURANCE";
+        public const string SP_DELETE_INSURANCE = "SP_DELETE_INSURANCE";
+        // bonus
+        public const string SP_GET_BONUS = "SP_GET_BONUS";
+        public const string SP_INSERT_BONUS = "SP_INSERT_BONUS";
+        public const string SP_DELETE_BONUS = "SP_DELETE_BONUS";
 
 
 
