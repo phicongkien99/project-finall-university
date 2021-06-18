@@ -51,7 +51,10 @@ namespace CoreLib.Commons
         public const string SP_GET_BONUS = "SP_GET_BONUS";
         public const string SP_INSERT_BONUS = "SP_INSERT_BONUS";
         public const string SP_DELETE_BONUS = "SP_DELETE_BONUS";
-
+        // statistic emp
+        public const string SP_GET_STATISTIC_EMP = "SP_GET_STATISTIC_EMP";
+        // statistic salary
+        public const string SP_GET_STATISTIC_SALARY = "SP_GET_STATISTIC_SALARY";
 
 
         // route api

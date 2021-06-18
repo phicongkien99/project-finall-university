@@ -139,6 +139,8 @@
     <Compile Include="Controllers\InsuranceController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\SalaryController.cs" />
+    <Compile Include="Controllers\StatisticEmployeeController.cs" />
+    <Compile Include="Controllers\StatisticSalaryController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserGroupController.cs" />
     <Compile Include="Global.asax.cs">
@@ -1757,6 +1759,8 @@
     <Content Include="Views\Salary\Index.cshtml" />
     <Content Include="Views\Insurance\Index.cshtml" />
     <Content Include="Views\Bonus\Index.cshtml" />
+    <Content Include="Views\StatisticEmployee\Index.cshtml" />
+    <Content Include="Views\StatisticSalary\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

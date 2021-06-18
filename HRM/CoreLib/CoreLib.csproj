@@ -60,6 +60,8 @@
     <Compile Include="Models\ModelView\EmployeeModelView.cs" />
     <Compile Include="Models\ModelView\UserModelView.cs" />
     <Compile Include="Models\Salary.cs" />
+    <Compile Include="Models\StatisticEmployee.cs" />
+    <Compile Include="Models\StatisticMoney.cs" />
     <Compile Include="Models\TotalSalary.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserGroup.cs" />

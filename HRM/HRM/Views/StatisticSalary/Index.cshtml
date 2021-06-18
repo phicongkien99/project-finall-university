@@ -1,0 +1,239 @@
+﻿
+@{
+    ViewBag.Title = "Thống kê lương";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link type="text/css" href="~/Content/css/addgroupadmin.css" rel="stylesheet" />
+
+<div class="title_line d-flex" style="margin-bottom: 0px;">
+    <div class="container">
+        <span class="title_line_item">
+            <font color="#e56f21"><a href="#" style="color:#e56f21;font-weight: 600;">Thống kê báo cáo</a></font>
+        </span>
+        <span class="title_line_item">
+            <i class="fa  fa-caret-right" style="color: #e56f21"></i>
+        </span>
+        <span class="title_line_item">
+            <font color="#e56f21" style="font-weight: 600;">Thống kê lương</font>
+        </span>
+    </div>
+</div>
+
+<div class="k-portlet__body">
+
+    <div class="mt-3">
+        <!-- Form -->
+        <div>
+            <form class="form-inline shadow-lg p-3 mb-5 bg-white rounded" style="border-radius: 10px">
+                <div class="content-body contain-form-input col-12">
+                    <h3 class="mb-2" style="text-align:center; color:#e56f21">BẢNG THỐNG KÊ LƯƠNG</h3>
+                </div>
+                <div class="content-body contain-form-input col-12">
+                    <div class="form-group col-6" style="float: left">
+                        <label class="label-input" for="TotalMoneyMonth">Tổng lương tháng</label>
+                        <input class="txt-input form-control" type="text" id="txtTotalMoneyMonth" name="TotalMoneyMonth" readonly>
+                        <br />                        
+                    </div>
+                    <div class="form-group col-6">
+                        <label class="label-input" for="TotalMoneyYear">Tổng lương năm</label>
+                        <input class="txt-input form-control" type="text" id="txtTotalMoneyYear" name="TotalMoneyYear" readonly>
+                        <br />                        
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- List -->
+        <div>
+            <table id="listEmp" class="table shadow" style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th>Mã Nhân Viên</th>
+                        <th>Tên Nhân Viên</th>
+                        <th>Email</th>
+                        <th>SĐT</th>                        
+                        <th>Phòng/Ban</th>                        
+                        <th>Lương</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+	$(document).ready( function() {
+
+        var renderColumns = [
+            {
+                data: "EmpCode",
+            },
+            {
+                data: "FullName",
+            },
+            {
+                data: "Email",
+            },
+            {
+                data: "Phone",
+            },
+            {
+                data: "DepartmentName",
+            },
+            {
+                data: "TotalMoney",
+                render: function (data) {
+                    return `${data}đ` 
+                },
+            },
+
+        ]
+
+        var Employee = function() {
+
+            this.init = function() {
+                loadData();
+                registerEvents();
+            }
+
+            var loadData = function () {
+
+                @*$.ajax({
+                    type: "GET",
+                    url: '@Url.Action("StatisticSalary", "StatisticSalary")',
+                    dataType: 'json',
+                    data: {} ,
+                    success: function (data) {
+
+                        console.log(data);
+
+                        $('#txtTotalEmp').val(data.TotalEmp);
+                        $('#txtTotalMale').val(data.TotalMale);
+                        $('#txtTotalFemale').val(data.TotalFemale);
+                        $('#txtAverageAge').val(data.AverageAge);
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });*@
+
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("StatisticSalary", "StatisticSalary")',
+                    dataType: 'json',
+                    data: {} ,
+                    success: function (data) {
+
+                        console.log(data);
+
+                        $('#txtTotalMoneyMonth').val(`${data[0].TotalMoneyMonth}đ`);
+                        $('#txtTotalMoneyYear').val(`${data[0].TotalMoneyYear}đ`);
+
+                        $('#listEmp').DataTable({
+                            'ordering': false,
+                            destroy: true,
+                            'searching': false,
+                            lengthChange: false,
+                            "bInfo": true,
+                            'paging': false,
+                            dom: "lti<'d-flex pagingListUser justify-content-center'p>",
+                            className: 'dt-body-right',
+                            data: data,
+                            columns: renderColumns
+                        });
+
+                        //isMessageSuccess(data);
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+
+            }
+
+            var registerEvents = function () {
+
+                // Action search
+                $('body').on('click', '#btnSearch', function (e) {
+                    e.preventDefault();
+
+                    let empCode = $('#txtEmpCode').val();
+                    let address = $('#txtAddress').val();
+                    let fullName = $('#txtFullName').val();
+                    let email = $('#txtEmail').val();
+                    let dob = $('#txtDOB').val();
+                    let department = $('#slDepartment').val();
+                    let status = $('#slStatus').val();
+
+                    let employeeViewModel = {
+                        EmpCode: empCode,
+                        BOD: dob,
+                        Address: address,
+                        Email: email,
+                        FullName: fullName,
+                        DepartmentCode: department,
+                        EmpStatus: status
+                    };
+
+                    //console.log(employeeViewModel);
+
+                    reloadData(employeeViewModel);
+                });
+
+                // Action click edit record
+                $('body').on('click', '.EditAccount', function (e) {
+                    e.preventDefault();
+
+                    let empCode = $(this).data('id');
+
+                    window.location.replace('@Url.Action("CreateEmployee", "Employee")' + '?empCode=' + empCode);
+                });
+
+                // Action click add user record
+                $('body').on('click', '.AddAccount', function (e) {
+                    e.preventDefault();
+
+                    let empCode = $(this).data('id');
+
+                    window.location.replace('@Url.Action("Index", "User")' + '?empCode=' + empCode);
+                });
+            }
+
+            function reloadData(employeeViewModel) {
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("GetEmployee", "Employee")',
+                    dataType: 'json',
+                    data: employeeViewModel ,
+                    success: function (data) {
+
+                        //console.log(data);
+
+                        $('#listEmp').DataTable({
+                            'ordering': false,
+                            destroy: true,
+                            'searching': false,
+                            lengthChange: false,
+                            "bInfo": true,
+                            'paging': false,
+                            dom: "lti<'d-flex pagingListUser justify-content-center'p>",
+                            className: 'dt-body-right',
+                            data: data,
+                            columns: renderColumns
+                        });
+
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            }
+        }
+
+        var employee = new Employee();
+        employee.init();
+
+    });
+
+</script>
