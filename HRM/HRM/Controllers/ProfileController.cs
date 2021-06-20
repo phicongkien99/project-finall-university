@@ -7,13 +7,12 @@ using System.Web.Mvc;
 
 namespace HRM.Controllers
 {
-    public class HomeController : Controller
+    public class ProfileController : Controller
     {
+        // GET: Profile
         [RequiredLogin]
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
-
             return View();
         }
     }

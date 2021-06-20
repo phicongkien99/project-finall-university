@@ -1,5 +1,6 @@
 ﻿using CoreLib.Models.ViewModels;
 using DatabaseDAL.DataAccess;
+using HRM.Authentication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace HRM.Controllers
     public class EmployeeController : Controller
     {
         // GET: Employee
+        [RequiredLogin]        
         public ActionResult ListEmployee()
         {
             return View();

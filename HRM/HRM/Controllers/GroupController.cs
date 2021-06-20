@@ -14,7 +14,7 @@ namespace HRM.Controllers
 {
     public class GroupController : Controller
     {        
-        // [RequiredLogin]
+        [RequiredLogin]
         public ActionResult Index()
         {
             return View();

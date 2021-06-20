@@ -132,12 +132,14 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Authentication\RequiredLoginAttribute.cs" />
     <Compile Include="Controllers\BonusController.cs" />
+    <Compile Include="Controllers\ChangePasswordController.cs" />
     <Compile Include="Controllers\ContractController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InsuranceController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\SalaryController.cs" />
     <Compile Include="Controllers\StatisticEmployeeController.cs" />
     <Compile Include="Controllers\StatisticSalaryController.cs" />
@@ -1761,6 +1763,8 @@
     <Content Include="Views\Bonus\Index.cshtml" />
     <Content Include="Views\StatisticEmployee\Index.cshtml" />
     <Content Include="Views\StatisticSalary\Index.cshtml" />
+    <Content Include="Views\ChangePassword\Index.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

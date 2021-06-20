@@ -86,6 +86,13 @@
             },
             {
                 data: "SalaryType",
+                render: function (data) {
+                    if (data == 'LHV') return 'Lương học việc';
+                    if (data == 'LNN') return 'Lương nhà nước';
+                    if (data == 'LTC') return 'Lương trợ cấp';
+                    if (data == 'LCB') return 'Lương cấp bậc';
+                    if (data == 'LK') return 'Lương khác';
+                }
             },
             {
                 data: "Money",

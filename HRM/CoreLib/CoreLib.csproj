@@ -51,6 +51,7 @@
     <Compile Include="Commons\CommonConstants.cs" />
     <Compile Include="Models\Bonus.cs" />
     <Compile Include="Models\CaptchaResult.cs" />
+    <Compile Include="Models\ChangePassword.cs" />
     <Compile Include="Models\Contract.cs" />
     <Compile Include="Models\CResult.cs" />
     <Compile Include="Models\Department.cs" />

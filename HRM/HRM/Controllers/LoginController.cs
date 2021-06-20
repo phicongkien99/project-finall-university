@@ -53,10 +53,10 @@ namespace HRM.Controllers
                                 HttpContext.Session["EmpCode"] = users.FirstOrDefault().EmpCode;
                                 HttpContext.Session["Fullname"] = users.FirstOrDefault().FullName;
                                 HttpContext.Session["Email"] = users.FirstOrDefault().Email;
-                                HttpContext.Session["GroupCode"] = users.FirstOrDefault().Username;
+                                HttpContext.Session["GroupCode"] = users.FirstOrDefault().GroupCode;
                             }
 
-                            return RedirectToAction("Index", "Home");
+                            return RedirectToAction("Index", "Profile");
                         }
                         catch (Exception)
                         {

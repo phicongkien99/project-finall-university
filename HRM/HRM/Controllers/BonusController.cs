@@ -1,5 +1,6 @@
 ﻿using CoreLib.Models;
 using DatabaseDAL;
+using HRM.Authentication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace HRM.Controllers
     public class BonusController : Controller
     {
         // GET: Bonus
+        [RequiredLogin]
         public ActionResult Index()
         {
             return View();

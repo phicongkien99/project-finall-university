@@ -1,5 +1,7 @@
 ﻿@{
     string username = Session["Username"]?.ToString() ?? "User";
+
+    string groupCode = Session["GroupCode"]?.ToString();
 }
 
 <!DOCTYPE html>
@@ -47,8 +49,8 @@
     <script type="text/javascript" src="~/Scripts/js/site.js"></script>
 </head>
 <body class="k-page--loading-enabled k-page--loading k-page--fixed k-header--fixed k-header--minimize-menu k-header-mobile--fixed" style="background-color: white">
-    
-    <!-- begin:: Page -->    
+
+    <!-- begin:: Page -->
     <div class="k-grid k-grid--hor k-grid--root">
         <div class="k-grid__item k-grid__item--fluid k-grid k-grid--ver k-page" style="height: 77%">
             <div class="k-grid__item k-grid__item--fluid k-grid k-grid--hor k-wrapper " id="k_wrapper">
@@ -83,109 +85,116 @@
                                                 <span id="ctl00_lblHome">NHÂN SỰ</span>
                                             </a>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                <li class="dropdown-menu-item f1_dropdown dropdown-submenu" id="k_drdwn_mng_lv2_1">
-                                                    <a id="dropdownMenu2" class="dropdown-item dropdown dropdown-general" href="@Url.Action("ListEmployee", "Employee")" style="border-bottom: 1px solid gainsboro;">
-                                                        <span>Hồ sơ nhân viên</span>
-                                                    </a>
-                                                </li>
-                                                <li class="dropdown-menu-item f2_dropdown dropdown-submenu" id="k_drdwn_mng_lv2_2">
-                                                    <a id="dropdownMenu2" class="dropdown-item dropdown dropdown-general" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#" style="border-bottom: 1px solid gainsboro;">
-                                                        <span>Hồ sơ cá nhân</span>
-                                                    </a>
-                                                </li>
-                                                <li class="dropdown-menu-item f2_dropdown dropdown-submenu" id="k_drdwn_mng_lv2_2">
-                                                    <a id="dropdownMenu2" class="dropdown-item dropdown dropdown-general" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#" style="border-bottom: 1px solid gainsboro;">
-                                                        <span>Hợp đồng</span>
-                                                    </a>
-                                                </li>
-                                                <li class="dropdown-menu-item f2_dropdown dropdown-submenu" id="k_drdwn_mng_lv2_2">
-                                                    <a id="dropdownMenu2" class="dropdown-item dropdown dropdown-general" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
-                                                        <span>Bảng lương</span>
-                                                    </a>
-                                                </li>
+                                                @if (groupCode == "QL")
+                                                {
+                                                    <li class="dropdown-menu-item f1_dropdown dropdown-submenu" id="k_drdwn_mng_lv2_1">
+                                                        <a id="dropdownMenu2" class="dropdown-item dropdown dropdown-general" href="@Url.Action("ListEmployee", "Employee")" style="border-bottom: 1px solid gainsboro;">
+                                                            <span>Hồ sơ nhân viên</span>
+                                                        </a>
+                                                    </li>
+                                                }
+
+                                                @if (groupCode == "QL" || groupCode == "NV")
+                                                {
+                                                    <li class="dropdown-menu-item f2_dropdown dropdown-submenu" id="k_drdwn_mng_lv2_2">
+                                                        <a id="dropdownMenu2" class="dropdown-item dropdown dropdown-general" href="@Url.Action("Index", "Profile")">
+                                                            <span>Hồ sơ cá nhân</span>
+                                                        </a>
+                                                    </li>
+                                                }
+
                                             </ul>
                                         </li>
-                                        <li class="divider"></li>
-                                        <li>
-                                            <a href="@Url.Action("Index", "Contract")" title="">
-                                                <span id="ctl00_Label1">QUẢN LÝ HỢP ĐỒNG</span>
-                                            </a>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li>
-                                            <a href="@Url.Action("Index", "Salary")" title="">
-                                                <span id="ctl00_Label1">QUẢN LÝ LƯƠNG</span>
-                                            </a>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li class="dropdownmenu nav-item dropdown fpts-dropdown" id="k_drdwn_mng_lv1">
-                                            <a href="#" title="" class="nav-link default-click" data-toggle="dropdown" id="dropdownMenu1">
-                                                <span id="ctl00_lblHome">QUẢN LÝ CHẾ ĐỘ</span>
-                                            </a>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                <div class="triangle"></div>
-                                                <li class="dropdown-menu-item f1_dropdown dropdown-submenu" id="k_drdwn_mng_lv2_1">
-                                                    <a id="dropdownMenu2" class="dropdown-item dropdown dropdown-general" href="@Url.Action("Index", "Insurance")" style="border-bottom: 1px solid gainsboro;">
-                                                        <span>Bảo hiểm xã hội</span>
-                                                    </a>
-                                                </li>
-                                                <li class="dropdown-menu-item f2_dropdown dropdown-submenu" id="k_drdwn_mng_lv2_2">
-                                                    <a id="dropdownMenu2" class="dropdown-item dropdown dropdown-general" href="@Url.Action("Index", "Bonus")">
-                                                        <span>Khen thưởng/Kỷ luật</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li class="dropdownmenu nav-item dropdown fpts-dropdown" id="k_drdwn_mng_lv1">
-                                            <a href="#" title="" class="nav-link default-click" data-toggle="dropdown" id="dropdownMenu1">
-                                                <span id="ctl00_lblHome">THỐNG KÊ BÁO CÁO</span>
-                                            </a>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                <div class="triangle"></div>
-                                                <li class="dropdown-menu-item f1_dropdown dropdown-submenu" id="k_drdwn_mng_lv2_1">
-                                                    <a id="dropdownMenu2" class="dropdown-item dropdown dropdown-general" href="@Url.Action("Index", "StatisticEmployee")" style="border-bottom: 1px solid gainsboro;">
-                                                        <span>Thống kê số lượng nhân viên</span>
-                                                    </a>
-                                                </li>
-                                                <li class="dropdown-menu-item f2_dropdown dropdown-submenu" id="k_drdwn_mng_lv2_2">
-                                                    <a id="dropdownMenu2" class="dropdown-item dropdown dropdown-general" href="@Url.Action("Index", "StatisticSalary")">
-                                                        <span>Thống kê tiền lương</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li class="dropdownmenu nav-item dropdown fpts-dropdown" id="k_drdwn_mng_lv1">
-                                            <a href="#" title="" class="nav-link default-click" data-toggle="dropdown" id="dropdownMenu1">
-                                                <span id="ctl00_lblHome">QUẢN LÝ HỆ THỐNG</span>
-                                            </a>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                <div class="triangle"></div>
-                                                <li class="dropdown-menu-item f1_dropdown dropdown-submenu" id="k_drdwn_mng_lv2_1">
-                                                    <a id="dropdownMenu2" class="dropdown-item dropdown dropdown-general" href="@Url.Action("Index", "User")" style="border-bottom: 1px solid gainsboro;">
-                                                        <span>Tạo tài khoản người dùng</span>
-                                                    </a>
-                                                </li>
-                                                <li class="dropdown-menu-item f2_dropdown dropdown-submenu" id="k_drdwn_mng_lv2_2">
-                                                    <a id="dropdownMenu2" class="dropdown-item dropdown dropdown-general" href="@Url.Action("Index", "Group")" style="border-bottom: 1px solid gainsboro;">
-                                                        <span>Quản lý nhóm</span>
-                                                    </a>
-                                                </li>
-                                                <li class="dropdown-menu-item f2_dropdown dropdown-submenu" id="k_drdwn_mng_lv2_2">
-                                                    <a id="dropdownMenu2" class="dropdown-item dropdown dropdown-general" href="@Url.Action("Index", "UserGroup")">
-                                                        <span>Thêm người dùng vào nhóm</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li>
-                                            <a href="Doi-mat-khau.html" title="">
-                                                <span id="ctl00_Label8">Đổi mật khẩu</span>
-                                            </a>
-                                        </li>
+                                        @if (groupCode == "QL")
+                                        {
+                                            <li class="divider"></li>
+                                            <li>
+                                                <a href="@Url.Action("Index", "Contract")" title="">
+                                                    <span id="ctl00_Label1">QUẢN LÝ HỢP ĐỒNG</span>
+                                                </a>
+                                            </li>
+                                            <li class="divider"></li>
+                                            <li>
+                                                <a href="@Url.Action("Index", "Salary")" title="">
+                                                    <span id="ctl00_Label1">QUẢN LÝ LƯƠNG</span>
+                                                </a>
+                                            </li>
+                                            <li class="divider"></li>
+                                            <li class="dropdownmenu nav-item dropdown fpts-dropdown" id="k_drdwn_mng_lv1">
+                                                <a href="#" title="" class="nav-link default-click" data-toggle="dropdown" id="dropdownMenu1">
+                                                    <span id="ctl00_lblHome">QUẢN LÝ CHẾ ĐỘ</span>
+                                                </a>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                    <div class="triangle"></div>
+                                                    <li class="dropdown-menu-item f1_dropdown dropdown-submenu" id="k_drdwn_mng_lv2_1">
+                                                        <a id="dropdownMenu2" class="dropdown-item dropdown dropdown-general" href="@Url.Action("Index", "Insurance")" style="border-bottom: 1px solid gainsboro;">
+                                                            <span>Bảo hiểm xã hội</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="dropdown-menu-item f2_dropdown dropdown-submenu" id="k_drdwn_mng_lv2_2">
+                                                        <a id="dropdownMenu2" class="dropdown-item dropdown dropdown-general" href="@Url.Action("Index", "Bonus")">
+                                                            <span>Khen thưởng/Kỷ luật</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="divider"></li>
+                                            <li class="dropdownmenu nav-item dropdown fpts-dropdown" id="k_drdwn_mng_lv1">
+                                                <a href="#" title="" class="nav-link default-click" data-toggle="dropdown" id="dropdownMenu1">
+                                                    <span id="ctl00_lblHome">THỐNG KÊ BÁO CÁO</span>
+                                                </a>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                    <div class="triangle"></div>
+                                                    <li class="dropdown-menu-item f1_dropdown dropdown-submenu" id="k_drdwn_mng_lv2_1">
+                                                        <a id="dropdownMenu2" class="dropdown-item dropdown dropdown-general" href="@Url.Action("Index", "StatisticEmployee")" style="border-bottom: 1px solid gainsboro;">
+                                                            <span>Thống kê số lượng nhân viên</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="dropdown-menu-item f2_dropdown dropdown-submenu" id="k_drdwn_mng_lv2_2">
+                                                        <a id="dropdownMenu2" class="dropdown-item dropdown dropdown-general" href="@Url.Action("Index", "StatisticSalary")">
+                                                            <span>Thống kê tiền lương</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="divider"></li>
+                                            <li class="dropdownmenu nav-item dropdown fpts-dropdown" id="k_drdwn_mng_lv1">
+                                                <a href="#" title="" class="nav-link default-click" data-toggle="dropdown" id="dropdownMenu1">
+                                                    <span id="ctl00_lblHome">QUẢN LÝ HỆ THỐNG</span>
+                                                </a>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                    <div class="triangle"></div>
+                                                    <li class="dropdown-menu-item f1_dropdown dropdown-submenu" id="k_drdwn_mng_lv2_1">
+                                                        <a id="dropdownMenu2" class="dropdown-item dropdown dropdown-general" href="@Url.Action("Index", "User")" style="border-bottom: 1px solid gainsboro;">
+                                                            <span>Tạo tài khoản người dùng</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="dropdown-menu-item f2_dropdown dropdown-submenu" id="k_drdwn_mng_lv2_2">
+                                                        <a id="dropdownMenu2" class="dropdown-item dropdown dropdown-general" href="@Url.Action("Index", "Group")" style="border-bottom: 1px solid gainsboro;">
+                                                            <span>Quản lý nhóm</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="dropdown-menu-item f2_dropdown dropdown-submenu" id="k_drdwn_mng_lv2_2">
+                                                        <a id="dropdownMenu2" class="dropdown-item dropdown dropdown-general" href="@Url.Action("Index", "UserGroup")">
+                                                            <span>Thêm người dùng vào nhóm</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        }
+
+                                        @if (groupCode == "QL" || groupCode == "NV")
+                                        {
+                                            <li class="divider"></li>
+                                            <li>
+                                                <a href="@Url.Action("Index", "ChangePassword")" title="">
+                                                    <span id="ctl00_Label8">Đổi mật khẩu</span>
+                                                </a>
+                                            </li>
+
+                                        }
                                     </ul>
+
                                 </div>
                             </div>
                             <!-- end: Header Menu -->
@@ -203,7 +212,7 @@
         <div class="ScrollTop" onclick="topFunction()" id="k_scrolltop"></div>
         <!-- end::Scrolltop -->
         <!-- begin:: Footer -->
-        <div class="k-footer k-grid__item" id="k_footer">
+        <div class="k-footer k-grid__item" style="margin-top:8%" id="k_footer">
             <div class="fpts-supporting-information">
                 <div class="k-container">
                     <p style="color: #494949;padding: 5px 0 5px !important; font-size: 16px !important;"></p>
@@ -212,7 +221,7 @@
             <div class="k-footer__content">
                 <div class="k-container">
                     <div class="row">
-                        <div class="col-lg-4">                            
+                        <div class="col-lg-4">
                         </div>
                         <div class="col-lg-4">
                             <p class="fpts-title">Thông tin liên hệ</p>
@@ -222,7 +231,7 @@
                                 <p class="mail">kienpc@fpts.com.vn</p>
                             </div>
                         </div>
-                        <div class="col-lg-4">                            
+                        <div class="col-lg-4">
                         </div>
                     </div>
                 </div>
@@ -234,7 +243,7 @@
             </div>
         </div>
         <!-- end:: Footer -->
-        
+
         <script type="text/javascript">
             toastr.options = {
                 "closeButton": true,

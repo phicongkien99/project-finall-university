@@ -17,6 +17,8 @@ namespace CoreLib.Commons
         // store procedure
         // login
         public const string SP_LOGIN = "SP_LOGIN";
+        // change password
+        public const string SP_CHANGE_PASSWORD = "SP_CHANGE_PASSWORD";
         // user
         public const string SP_GET_USER = "SP_GET_USER";
         public const string SP_GET_USER_EMPLOYEE = "SP_GET_USER_EMPLOYEE";

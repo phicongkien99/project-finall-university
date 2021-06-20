@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "Đổi mật khẩu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+<div class="title_line d-flex" style="margin-bottom: 0px;">
+    <div class="container">
+        <span class="title_line_item">
+            <font color="#e56f21"><a href="#" style="color:#e56f21;font-weight: 600;">Đổi mật khẩu</a></font>
+        </span>
+    </div>
+</div>
+
+<div class="container" style="height: 481px; margin-top: 10%">
+    <div class="row">
+        
+    </div>
+    <div class="row d-flex justify-content-center" style="margin-left: 40%">
+        <div class="center  nav-login text-center fpts-login_design" style="background-color: inherit">
+            <div class="mt-1">
+                <h4 class="mb-2" style="text-align:center;color:#e56f21">ĐỔI MẬT KHẨU</h4>
+                <form id="formLogin" enctype="multipart/form-data" class="col-12 padt20 form-change-password">
+                    <div class="form-group row justify-ipad-password">
+                        <div class="col-md-5 text-box-label ">
+                            <label class="text-box-left" for="OldPassword">Mật khẩu cũ</label>
+                        </div>
+                        <div class="col-md-7">
+                            <input class="form-control" placeholder="Old Password" type="password" id="OldPassword" name="OldPassword" autofocus style="background-color: inherit" required />
+                        </div>
+                    </div>
+                    <div class="form-group row justify-ipad-password">
+                        <div class="col-md-5 text-box-label ">
+                            <label class="text-box-left" for="NewPassword">Mật khẩu mới</label>
+                        </div>
+                        <div class="col-md-7">
+                            <input class="form-control" placeholder="New Password" type="password" id="password" name="NewPassword" autofocus style="background-color: inherit" required />
+                        </div>
+                    </div>
+                    <div class="form-group row justify-ipad-password">
+                        <div class="col-md-5 text-box-label ">
+                            <label class="text-box-left" for="ConfirmPassword">Xác nhận mật khẩu</label>
+                        </div>
+                        <div class="col-md-7">
+                            <input class="form-control" placeholder="Confirm Password" type="password" id="ConfirmPassword" name="ConfirmPassword" autofocus style="background-color: inherit" required />
+                        </div>
+                    </div>
+                    <div class="form-group row justify-ipad-password">
+                        <div class="col-md-12">
+                            <button type="submit" class=" btn-primary form-control " id="btnChangePassword" data-callback='onSubmit' style="border-radius: 5px; width: 100% !important; background-color:#e56f21 ">Đổi mật khẩu</button>
+                        </div>
+                    </div>
+                </form>
+            </div>            
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('#btnChangePassword').click((e) => {
+        e.preventDefault();
+
+        let changePassword = $('form').serialize();
+        
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("ChangePassword", "ChangePassword")',
+            dataType: 'json',
+            data: changePassword,
+            success: function (data) {
+
+                isMessageSuccess(data);
+
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+      
+    });
+</script>

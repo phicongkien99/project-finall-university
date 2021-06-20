@@ -1,4 +1,5 @@
 ﻿using DatabaseDAL.DataAccess;
+using HRM.Authentication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace HRM.Controllers
     public class StatisticSalaryController : Controller
     {
         // GET: StatisticSalary
+        [RequiredLogin]
         public ActionResult Index()
         {
             return View();

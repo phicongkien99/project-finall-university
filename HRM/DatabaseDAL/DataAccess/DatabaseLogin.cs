@@ -110,6 +110,61 @@ namespace DatabaseDAL.DataAccess
 
             return new List<string>();
         }
-        
+
+        public static CResult ChangePassword(ChangePassword changePassword)
+        {
+
+            CSQL objSQL = new CSQL(CommonConstants.CONNECTION_STRING);
+            CResult objResult;
+
+            try
+            {
+                if (objSQL._OpenConnection() == false)
+                    return objResult = new CResult { ErrorCode = -1, ErrorMessage = "Open Connection False!", Data = null };
+
+                // input param
+                SqlParameter prmUsername = new SqlParameter("@Username", SqlDbType.VarChar, 50);
+                prmUsername.Direction = ParameterDirection.Input;
+                objSQL.Command.Parameters.Add(prmUsername);
+
+                SqlParameter prmOldPassword = new SqlParameter("@OldPassword", SqlDbType.VarChar, 50);
+                prmOldPassword.Direction = ParameterDirection.Input;
+                objSQL.Command.Parameters.Add(prmOldPassword);
+
+                SqlParameter prmNewPassword = new SqlParameter("@NewPassword", SqlDbType.NVarChar, 50);
+                prmNewPassword.Direction = ParameterDirection.Input;
+                objSQL.Command.Parameters.Add(prmNewPassword);
+
+                SqlParameter prmConfirmPassword = new SqlParameter("@ConfirmPassword", SqlDbType.NVarChar, 50);
+                prmConfirmPassword.Direction = ParameterDirection.Input;
+                objSQL.Command.Parameters.Add(prmConfirmPassword);
+
+                // output param
+                SqlParameter Message = new SqlParameter("@Message", SqlDbType.NVarChar, 100);
+                Message.Direction = ParameterDirection.Output;
+                objSQL.Command.Parameters.Add(Message);
+
+                SqlParameter ErrCode = new SqlParameter("@ErrCode", SqlDbType.Int);
+                ErrCode.Direction = ParameterDirection.Output;
+                objSQL.Command.Parameters.Add(ErrCode);
+
+                // set value
+                prmUsername.Value = changePassword.Username;
+                prmOldPassword.Value = changePassword.OldPassword.HashMD5();
+                prmNewPassword.Value = changePassword.NewPassword.HashMD5();
+                prmConfirmPassword.Value = changePassword.ConfirmPassword.HashMD5();
+
+                objSQL.ExecuteSP(CommonConstants.SP_CHANGE_PASSWORD);
+
+                var errCode = int.Parse(ErrCode.Value.ToString());
+                return objResult = new CResult { ErrorCode = errCode, ErrorMessage = Message.Value.ToString(), Data = null };
+            }
+            catch (Exception ex)
+            {
+                objResult = new CResult { ErrorCode = -1, ErrorMessage = ex.Message, Data = null };
+            }
+
+            return objResult;
+        }
     }
 }
